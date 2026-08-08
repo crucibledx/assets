@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+*.swp
+*.swo
+*~
+
+# draw.io backup files
+.$*.drawio.bkp
+*.drawio.dtmp
+
+# Temporary generation artifacts
+tmp/
