@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
+  <defs>
+    <!-- Background gradient — deep forge dark -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1117"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0D1117"/>
+    </linearGradient>
+
+    <!-- Molten glow radiating from icon -->
+    <radialGradient id="heatAura" cx="16%" cy="55%" r="45%">
+      <stop offset="0%" stop-color="#E84D00" stop-opacity="0.22"/>
+      <stop offset="50%" stop-color="#FF6B1A" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#E84D00" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Icon gradients -->
+    <radialGradient id="iGlowCore" cx="50%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#FF6B1A" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#E84D00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#C13800" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="iMetalBody" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#3D4A5C"/>
+      <stop offset="100%" stop-color="#0D1117"/>
+    </radialGradient>
+    <linearGradient id="iRimGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A5568"/>
+      <stop offset="50%" stop-color="#8A9BB0"/>
+      <stop offset="100%" stop-color="#4A5568"/>
+    </linearGradient>
+    <linearGradient id="iMoltGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFB347"/>
+      <stop offset="100%" stop-color="#E84D00"/>
+    </linearGradient>
+
+    <!-- Text gradient -->
+    <linearGradient id="textGradMain" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F0F4F8"/>
+      <stop offset="100%" stop-color="#8A9BB0"/>
+    </linearGradient>
+
+    <!-- Accent gradient for sub-brand line -->
+    <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E84D00"/>
+      <stop offset="60%" stop-color="#FF6B1A"/>
+      <stop offset="100%" stop-color="#E84D00" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Subtle grid pattern -->
+    <pattern id="gridPat" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1F2937" stroke-width="0.5"/>
+    </pattern>
+
+    <!-- Filters -->
+    <filter id="iconGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="heatBlur">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="shimmer">
+      <feGaussianBlur stdDeviation="1"/>
+    </filter>
+
+    <clipPath id="iVesselClip">
+      <path d="M108,74 L112,168 Q150,192 188,168 L192,74 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="300" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid overlay -->
+  <rect width="900" height="300" fill="url(#gridPat)" opacity="0.4"/>
+
+  <!-- Heat aura (large, behind icon) -->
+  <rect width="900" height="300" fill="url(#heatAura)"/>
+
+  <!-- Decorative geometric lines — right side -->
+  <line x1="520" y1="0" x2="900" y2="0" stroke="#1F2937" stroke-width="1"/>
+  <line x1="520" y1="300" x2="900" y2="300" stroke="#1F2937" stroke-width="1"/>
+  <line x1="900" y1="0" x2="900" y2="300" stroke="#1F2937" stroke-width="1"/>
+
+  <!-- Product name pills — right side decoration -->
+  <g opacity="0.55">
+    <!-- forge -->
+    <rect x="580" y="52" width="72" height="22" rx="3" fill="none" stroke="#2D3748" stroke-width="1"/>
+    <text x="616" y="67" font-family="'Courier New', monospace" font-size="10" fill="#4A5568" text-anchor="middle" letter-spacing="1">forge</text>
+
+    <!-- anvil -->
+    <rect x="664" y="52" width="72" height="22" rx="3" fill="none" stroke="#2D3748" stroke-width="1"/>
+    <text x="700" y="67" font-family="'Courier New', monospace" font-size="10" fill="#4A5568" text-anchor="middle" letter-spacing="1">anvil</text>
+
+    <!-- lathe -->
+    <rect x="748" y="52" width="72" height="22" rx="3" fill="none" stroke="#2D3748" stroke-width="1"/>
+    <text x="784" y="67" font-family="'Courier New', monospace" font-size="10" fill="#4A5568" text-anchor="middle" letter-spacing="1">lathe</text>
+
+    <!-- foundry -->
+    <rect x="580" y="84" width="88" height="22" rx="3" fill="none" stroke="#2D3748" stroke-width="1"/>
+    <text x="624" y="99" font-family="'Courier New', monospace" font-size="10" fill="#4A5568" text-anchor="middle" letter-spacing="1">foundry</text>
+
+    <!-- mesh -->
+    <rect x="680" y="84" width="72" height="22" rx="3" fill="none" stroke="#2D3748" stroke-width="1"/>
+    <text x="716" y="99" font-family="'Courier New', monospace" font-size="10" fill="#4A5568" text-anchor="middle" letter-spacing="1">mesh</text>
+  </g>
+
+  <!-- Vertical separator line -->
+  <line x1="550" y1="40" x2="550" y2="260" stroke="#1F2937" stroke-width="1" stroke-dasharray="4,6"/>
+
+  <!-- === LARGE ICON === -->
+  <g transform="translate(60, 30)">
+    <!-- Outer glow blob -->
+    <ellipse cx="90" cy="162" rx="55" ry="22" fill="#FF6B1A" opacity="0.12" filter="url(#heatBlur)"/>
+
+    <!-- Vessel body -->
+    <path d="M48,44 L54,168 Q90,196 126,168 L132,44 Z"
+          fill="url(#iMetalBody)"
+          stroke="url(#iRimGrad)"
+          stroke-width="2"/>
+
+    <!-- Molten material -->
+    <path d="M57,148 Q90,176 123,148 L121,124 Q90,144 59,124 Z"
+          fill="url(#iMoltGrad)"
+          clip-path="url(#iVesselClip)"
+          filter="url(#iconGlow)"
+          opacity="0.95"/>
+
+    <!-- Glow core surface -->
+    <ellipse cx="90" cy="144" rx="32" ry="11"
+             fill="url(#iGlowCore)"
+             clip-path="url(#iVesselClip)"
+             filter="url(#iconGlow)"/>
+
+    <!-- Bright hot spot -->
+    <ellipse cx="84" cy="142" rx="10" ry="4"
+             fill="#FFE0A0"
+             opacity="0.65"
+             filter="url(#shimmer)"/>
+
+    <!-- Tiny brightest point -->
+    <ellipse cx="82" cy="141" rx="3" ry="1.5"
+             fill="#FFFFFF"
+             opacity="0.4"/>
+
+    <!-- Rim top -->
+    <ellipse cx="90" cy="44" rx="44" ry="10"
+             fill="none"
+             stroke="url(#iRimGrad)"
+             stroke-width="2.5"/>
+    <ellipse cx="90" cy="44" rx="44" ry="10"
+             fill="#0F1623"
+             opacity="0.7"/>
+    <ellipse cx="90" cy="44" rx="40" ry="8"
+             fill="#0D1117"
+             opacity="0.6"/>
+
+    <!-- Heat shimmer lines -->
+    <line x1="74" y1="34" x2="70" y2="12" stroke="#FFA940" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+    <line x1="84" y1="33" x2="82" y2="8"  stroke="#FFA940" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+    <line x1="90" y1="33" x2="90" y2="6"  stroke="#FFA940" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+    <line x1="96" y1="33" x2="98" y2="8"  stroke="#FFA940" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+    <line x1="106" y1="34" x2="110" y2="12" stroke="#FFA940" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+
+    <!-- Vessel sheen -->
+    <path d="M52,60 Q50,112 53,160" fill="none" stroke="#3D4A5C" stroke-width="1.5" opacity="0.3"/>
+  </g>
+
+  <!-- === WORDMARK & TEXT === -->
+
+  <!-- "CRUCIBLE" large -->
+  <text x="230" y="148"
+        font-family="'Helvetica Neue', 'Arial Black', sans-serif"
+        font-size="64"
+        font-weight="900"
+        letter-spacing="8"
+        fill="url(#textGradMain)">CRUCIBLE</text>
+
+  <!-- Amber accent rule -->
+  <rect x="230" y="160" width="310" height="2" fill="url(#accentLine)" rx="1"/>
+
+  <!-- Tagline -->
+  <text x="232" y="185"
+        font-family="'Helvetica Neue', 'Arial', sans-serif"
+        font-size="11"
+        font-weight="400"
+        letter-spacing="5"
+        fill="#4A5568">AI INFRASTRUCTURE PLATFORM</text>
+
+  <!-- Bottom detail — version/phase label -->
+  <text x="232" y="230"
+        font-family="'Courier New', monospace"
+        font-size="10"
+        fill="#2D3748"
+        letter-spacing="2">v0.1 · forge-bootstrap · Phase 1</text>
+
+  <!-- Corner marks — industrial feel -->
+  <path d="M20,20 L20,8 L32,8" fill="none" stroke="#2D3748" stroke-width="1.5"/>
+  <path d="M880,20 L880,8 L868,8" fill="none" stroke="#2D3748" stroke-width="1.5"/>
+  <path d="M20,280 L20,292 L32,292" fill="none" stroke="#2D3748" stroke-width="1.5"/>
+  <path d="M880,280 L880,292 L868,292" fill="none" stroke="#2D3748" stroke-width="1.5"/>
+</svg>
