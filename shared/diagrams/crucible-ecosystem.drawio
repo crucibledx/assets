@@ -1,0 +1,265 @@
+<mxfile host="Electron" pages="2">
+  <diagram name="Crucible Ecosystem" id="ecosystem">
+    <mxGraphModel dx="1629" dy="796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="dp_XoKav52C9tCfftmd2-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="620" width="1190" x="-10" as="geometry" />
+        </mxCell>
+        <mxCell id="platform-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#3F51B5;fontSize=14;fontStyle=1;fontColor=#1A237E;strokeWidth=3;verticalAlign=top;spacingTop=6;arcSize=4;" value="Crucible Platform" vertex="1">
+          <mxGeometry height="275" width="960" x="200" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="KSGgPtUgfoLzgxHONO5M-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;" value="&lt;span style=&quot;color: rgb(150, 115, 166); white-space: nowrap;&quot;&gt;&lt;font&gt;Future Products&amp;nbsp;🔮&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="175" width="200" x="940" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#333;" value="Crucible — Developer Experience Infrastructure Platform" vertex="1">
+          <mxGeometry height="35" width="700" x="330" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;fontSize=12;fontStyle=2;align=center;fontColor=#666666;whiteSpace=wrap;" value="Cross-tool coordination that no single AI vendor will build. Don&amp;rsquo;t compete, complete." vertex="1">
+          <mxGeometry height="22" width="520" x="420" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="brand-badge" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999;fontSize=9;fontStyle=1;strokeWidth=1;fontColor=#666;" value="@crucibledx &amp;nbsp;|&amp;nbsp; MIT License &amp;nbsp;|&amp;nbsp; TypeScript + Bun &amp;nbsp;|&amp;nbsp; Single-binary CLI" vertex="1">
+          <mxGeometry height="22" width="400" x="480" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="users-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;" value="Who Uses Crucible" vertex="1">
+          <mxGeometry height="126" width="160" x="10" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="user-dev" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1;strokeWidth=1;" value="Developer&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;uses AI assistants daily&lt;/span&gt;" vertex="1">
+          <mxGeometry height="35" width="130" x="25" y="176" as="geometry" />
+        </mxCell>
+        <mxCell id="user-lead" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1;strokeWidth=1;" value="Team Lead / Org Admin&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;maintains shared AI configs&lt;/span&gt;" vertex="1">
+          <mxGeometry height="35" width="130" x="25" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="forge-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontColor=#1A237E;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;" value="Forge CLI &amp;nbsp;✅ shipped" vertex="1">
+          <mxGeometry height="175" width="200" x="220" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="forge-desc" parent="1" style="text;html=1;fontSize=9;align=left;fontColor=#1A237E;whiteSpace=wrap;spacingLeft=3;" value="&lt;b&gt;AI Resource Lifecycle Platform&lt;/b&gt;&lt;br&gt;Sync shared skills, rules, workflows&lt;br&gt;from central source to every AI tool&lt;br&gt;in the right format.&lt;br&gt;&lt;br&gt;&amp;#10003; 12 commands (init, sync, status, health...)&lt;br&gt;&amp;#10003; 5 AI assistants supported&lt;br&gt;&amp;#10003; Git + Local sources&lt;br&gt;&amp;#10003; Auto layout detection&lt;br&gt;&amp;#10003; Scheduler (auto-sync)&lt;br&gt;&amp;#10003; SHA-256 change detection&lt;br&gt;&amp;#10003; Conflict resolution" vertex="1">
+          <mxGeometry height="140" width="185" x="225" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="ember-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontColor=#E65100;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;" value="Ember &amp;nbsp;📋 designed" vertex="1">
+          <mxGeometry height="175" width="200" x="700" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ember-desc" parent="1" style="text;html=1;fontSize=9;align=left;fontColor=#BF360C;whiteSpace=wrap;spacingLeft=3;" value="&lt;b&gt;AI Assistant Observability&lt;/b&gt;&lt;br&gt;Normalized telemetry for AI tool usage.&lt;br&gt;Version-aware metrics. Privacy-first.&lt;br&gt;&lt;br&gt;&amp;#9679; AgentMetricEvent schema&lt;br&gt;&amp;#9679; Skill activation + cost tracking&lt;br&gt;&amp;#9679; Version enrichment via Forge&lt;br&gt;&amp;#9679; Push to company&amp;rsquo;s own backend&lt;br&gt;&amp;nbsp;&amp;nbsp;(DataDog, Grafana, OTLP, webhook)&lt;br&gt;&amp;#9679; Crucible never sees the data&lt;br&gt;&amp;#9679; Closed loop: measure → optimize" vertex="1">
+          <mxGeometry height="140" width="185" x="705" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="starter-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#2D7600;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;" value="Forge Skills Starter &amp;nbsp;✅" vertex="1">
+          <mxGeometry height="175" width="200" x="460" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="starter-desc" parent="1" style="text;html=1;fontSize=9;align=left;fontColor=#2D7600;whiteSpace=wrap;spacingLeft=3;" value="&lt;b&gt;AI Resource Lifecycle Platform&lt;/b&gt;&lt;br&gt;Template repo for authoring skills.&lt;br&gt;Convention-over-configuration.&lt;br&gt;&lt;br&gt;&amp;#10003; /create-resource orchestrator skill&lt;br&gt;&amp;#10003; Specimen-based testing&lt;br&gt;&amp;#10003; Versioned skills with frontmatter&lt;br&gt;&amp;#10003; Lifecycle: design → develop → test&lt;br&gt;&amp;#10003; Plugs into Forge for distribution&lt;br&gt;&amp;#10003; One repo → all AI tools" vertex="1">
+          <mxGeometry height="140" width="185" x="465" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="anvil" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=8;fontStyle=1;strokeWidth=1;fontColor=#9673a6;" value="Anvil (SDK)&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Plugin authoring SDK&lt;/span&gt;" vertex="1">
+          <mxGeometry height="25" width="160" x="960" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="lathe" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=8;fontStyle=1;strokeWidth=1;fontColor=#9673a6;" value="Lathe (MCP Server)&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;AI self-maintenance&lt;/span&gt;" vertex="1">
+          <mxGeometry height="25" width="160" x="960" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="foundry" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=8;fontStyle=1;strokeWidth=1;fontColor=#9673a6;" value="Foundry (Registry)&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Plugin marketplace&lt;/span&gt;" vertex="1">
+          <mxGeometry height="25" width="160" x="960" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="cast" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=8;fontStyle=1;strokeWidth=1;fontColor=#9673a6;" value="Cast (Frontend CLI)&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;UI scaffolding&lt;/span&gt;" vertex="1">
+          <mxGeometry height="25" width="160" x="960" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="asst-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=4;fontColor=#6c8ebf;" value="AI Assistants (5 supported, extensible)" vertex="1">
+          <mxGeometry height="65" width="410" x="200" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="a-cc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" value="Claude Code" vertex="1">
+          <mxGeometry height="25" width="70" x="210" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="a-cursor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" value="Cursor" vertex="1">
+          <mxGeometry height="25" width="70" x="290" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="a-windsurf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" value="Windsurf" vertex="1">
+          <mxGeometry height="25" width="70" x="370" y="440.5" as="geometry" />
+        </mxCell>
+        <mxCell id="a-copilot" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" value="Copilot" vertex="1">
+          <mxGeometry height="25" width="70" x="450" y="440.5" as="geometry" />
+        </mxCell>
+        <mxCell id="a-cline" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" value="Cline" vertex="1">
+          <mxGeometry height="25" width="70" x="530" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="obs-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=4;fontColor=#2D7600;" value="Company&amp;rsquo;s Observability Stack" vertex="1">
+          <mxGeometry height="65" width="250" x="725" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="o-dd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#82b366;fontSize=8;fontStyle=1;strokeWidth=1;" value="DataDog" vertex="1">
+          <mxGeometry height="20" width="50" x="735" y="441.5" as="geometry" />
+        </mxCell>
+        <mxCell id="o-graf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#82b366;fontSize=8;fontStyle=1;strokeWidth=1;" value="Grafana" vertex="1">
+          <mxGeometry height="20" width="50" x="795" y="441.5" as="geometry" />
+        </mxCell>
+        <mxCell id="o-otlp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#82b366;fontSize=8;fontStyle=1;strokeWidth=1;" value="OTLP" vertex="1">
+          <mxGeometry height="22" width="50" x="855" y="441.5" as="geometry" />
+        </mxCell>
+        <mxCell id="o-hook" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#82b366;fontSize=8;fontStyle=1;strokeWidth=1;" value="Webhook" vertex="1">
+          <mxGeometry height="20" width="50" x="915" y="441.5" as="geometry" />
+        </mxCell>
+        <mxCell id="KSGgPtUgfoLzgxHONO5M-5" edge="1" parent="1" source="src-box" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;curved=0;strokeWidth=2;flowAnimation=1;strokeColor=light-dark(#445a64, #ededed);exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="forge-box" value="&lt;span style=&quot;color: rgb(69, 90, 100); font-size: 9px;&quot;&gt;pull configs&lt;/span&gt;">
+          <mxGeometry relative="1" x="-0.1164" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="src-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontColor=#37474F;fontSize=10;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=4;align=center;" value="Sources (where shared configs live)" vertex="1">
+          <mxGeometry height="53" width="300" x="200" y="487" as="geometry" />
+        </mxCell>
+        <mxCell id="s-git" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontSize=8;fontStyle=1;strokeWidth=1;fontColor=#37474F;" value="Git Repos (SSH/HTTPS)" vertex="1">
+          <mxGeometry height="15" width="110" x="210" y="517" as="geometry" />
+        </mxCell>
+        <mxCell id="s-local" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontSize=8;fontStyle=1;strokeWidth=1;fontColor=#37474F;" value="Local Paths" vertex="1">
+          <mxGeometry height="15" width="70" x="330" y="517" as="geometry" />
+        </mxCell>
+        <mxCell id="s-future" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999;fontSize=7;fontStyle=2;strokeWidth=1;fontColor=#999;" value="knowhub, HTTP..." vertex="1">
+          <mxGeometry height="15" width="80" x="410" y="517" as="geometry" />
+        </mxCell>
+        <mxCell id="e-users-platform" edge="1" parent="1" source="users-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#d6b656;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="platform-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-forge-asst" edge="1" parent="1" source="forge-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#3F51B5;flowAnimation=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontColor=#3F51B5;" target="asst-box" value="sync to">
+          <mxGeometry relative="1" x="-0.4308" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="271.29" y="315" />
+              <mxPoint x="271.29" y="390.03" />
+              <mxPoint x="302.49" y="390.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-ember-asst" edge="1" parent="1" source="ember-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#E65100;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.65;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontColor=#E65100;flowAnimation=1;" target="asst-box" value="collect from">
+          <mxGeometry relative="1" x="-0.79" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="800" y="390.05" />
+              <mxPoint x="466.48" y="390.05" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-ember-obs" edge="1" parent="1" source="ember-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#E65100;dashed=1;flowAnimation=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontColor=#E65100;" target="obs-box" value="push metrics">
+          <mxGeometry relative="1" x="-0.4737" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="850" y="410" />
+              <mxPoint x="850" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-starter-forge" edge="1" parent="1" source="starter-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#82b366;dashed=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fontSize=9;fontColor=#2D7600;" target="forge-box" value="source repo">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="339.97" />
+              <mxPoint x="370" y="339.97" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-forge-ember" edge="1" parent="1" source="forge-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#3F51B5;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;fontSize=8;fontColor=#3F51B5;fontStyle=2;" target="ember-box" value="version enrichment">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="349.97" />
+              <mxPoint x="750" y="349.97" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="moat" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontColor=#37474F;fontSize=10;fontStyle=0;strokeWidth=1;align=left;spacingLeft=8;verticalAlign=middle;" value="&lt;b&gt;Structural advantage:&lt;/b&gt; No single AI vendor will build cross-vendor sync. No observability tool has version-aware skill telemetry. The closed loop (author → distribute → use → measure → optimize) requires the entire ecosystem." vertex="1">
+          <mxGeometry height="38" width="620" x="370" y="552" as="geometry" />
+        </mxCell>
+        <mxCell id="punch" parent="1" style="text;html=1;fontSize=14;fontStyle=3;align=center;fontColor=#333;whiteSpace=wrap;" value="&amp;ldquo;Platform outlasts any individual tool.&amp;rdquo;" vertex="1">
+          <mxGeometry height="25" width="400" x="480" y="590" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Product Phases" id="phases">
+    <mxGraphModel dx="1629" dy="796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8FFghEwiDCmWxG_-fzdi-1" parent="1" style="whiteSpace=wrap;html=1;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="530" width="1160" x="-20" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#333;" value="Crucible — Product Roadmap &amp;amp; Phases" vertex="1">
+          <mxGeometry height="35" width="500" x="310" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;fontSize=12;fontStyle=2;align=center;fontColor=#666666;whiteSpace=wrap;" value="Brand broad, ship narrow. Each product is a focused CLI sharing infrastructure." vertex="1">
+          <mxGeometry height="22" width="500" x="310" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="ph1-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontColor=#1A237E;fontSize=13;fontStyle=1;strokeWidth=3;verticalAlign=top;spacingTop=5;" value="Phase 1 — Foundation &amp;nbsp;✅ done" vertex="1">
+          <mxGeometry height="180" width="250" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ph1-forge" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontColor=#1A237E;fontSize=11;fontStyle=1;strokeWidth=2;" value="Forge CLI v0.6" vertex="1">
+          <mxGeometry height="28" width="200" x="25" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="ph1-desc" parent="1" style="text;html=1;fontSize=10;align=left;fontColor=#1A237E;whiteSpace=wrap;spacingLeft=3;" value="✓ Init, sync, status, health, config&lt;br&gt;✓ 5 AI assistants, 2 source types&lt;br&gt;✓ Scheduler, conflict resolution&lt;br&gt;✓ SHA-256 change detection&lt;br&gt;✓ Global + project configs" vertex="1">
+          <mxGeometry height="70" width="157.5" x="46.25" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ph1-starter" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#2D7600;fontSize=10;fontStyle=1;strokeWidth=1;" value="Forge Skills Starter v0.6" vertex="1">
+          <mxGeometry height="24" width="200" x="25" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="ph2-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontColor=#E65100;fontSize=13;fontStyle=1;strokeWidth=3;verticalAlign=top;spacingTop=5;" value="Phase 2 — Observability" vertex="1">
+          <mxGeometry height="180" width="250" x="290" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ph2-ember" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontColor=#E65100;fontSize=11;fontStyle=1;strokeWidth=2;" value="Ember" vertex="1">
+          <mxGeometry height="28" width="200" x="315" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="ph2-desc" parent="1" style="text;html=1;fontSize=10;align=left;fontColor=#BF360C;whiteSpace=wrap;spacingLeft=3;" value="● Normalized AI telemetry collection&lt;br&gt;● Version-aware skill metrics&lt;br&gt;● Push to company’s own stack&lt;br&gt;● Closed loop with Forge&lt;br&gt;● Privacy-first (Prometheus model)" vertex="1">
+          <mxGeometry height="70" width="167.5" x="331.25" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ph2-launch" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontColor=#1A237E;fontSize=10;fontStyle=1;strokeWidth=1;" value="Forge public launch (npm, docs, CI)" vertex="1">
+          <mxGeometry height="24" width="200" x="315" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="ph3-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;strokeWidth=3;verticalAlign=top;spacingTop=5;" value="Phase 3 — Extensibility" vertex="1">
+          <mxGeometry height="180" width="250" x="580" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ph3-anvil" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;strokeWidth=2;fontColor=#9673a6;" value="Anvil (Plugin SDK)" vertex="1">
+          <mxGeometry height="28" width="200" x="605" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="ph3-desc" parent="1" style="text;html=1;fontSize=10;align=left;fontColor=#7B1FA2;whiteSpace=wrap;spacingLeft=3;" value="● Plugin authoring SDK&lt;br&gt;● stdin/stdout JSON protocol&lt;br&gt;● Third-party integrations&lt;br&gt;● Community ecosystem grows" vertex="1">
+          <mxGeometry height="55" width="146.25" x="626.87" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ph3-lathe" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;strokeWidth=1;fontColor=#9673a6;" value="Lathe (MCP Server)" vertex="1">
+          <mxGeometry height="25" width="95" x="605" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="ph3-foundry" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;strokeWidth=1;fontColor=#9673a6;" value="Foundry (Registry)" vertex="1">
+          <mxGeometry height="25" width="95" x="710" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="ph4-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;fontColor=#666;" value="Phase 4+ — Platform Scale" vertex="1">
+          <mxGeometry height="180" width="250" x="870" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ph4-desc" parent="1" style="text;html=1;fontSize=10;align=left;fontColor=#666;whiteSpace=wrap;spacingLeft=3;" value="● Cast (frontend CLI)&lt;br&gt;● Mesh (merge engine)&lt;br&gt;● Enterprise features&lt;br&gt;● Community plugins&lt;br&gt;● AI self-maintenance&lt;br&gt;● Multi-tool orchestration&lt;br&gt;&lt;br&gt;&lt;i&gt;Platform of focused CLIs&lt;br&gt;sharing @crucible/smelt&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="150" x="920" y="117.5" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ph1-ph2" edge="1" parent="1" source="ph1-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#6c8ebf;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#dae8fc;" target="ph2-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ph2-ph3" edge="1" parent="1" source="ph2-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=light-dark(#e65100, #d7817e);flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#f8cecc;" target="ph3-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ph3-ph4" edge="1" parent="1" source="ph3-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#9673a6;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#e1d5e7;" target="ph4-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="principles-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontColor=#37474F;fontSize=10;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;" value="Core Principles" vertex="1">
+          <mxGeometry height="147.5" width="440" x="340" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="pr1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontSize=9;fontStyle=1;strokeWidth=1;fontColor=#37474F;" value="Don&amp;rsquo;t compete,&lt;br&gt;complete" vertex="1">
+          <mxGeometry height="35" width="120" x="360" y="337.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pr2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontSize=9;fontStyle=1;strokeWidth=1;fontColor=#37474F;" value="DX is the&lt;br&gt;whole product" vertex="1">
+          <mxGeometry height="35" width="120" x="500" y="337.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pr3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontSize=9;fontStyle=1;strokeWidth=1;fontColor=#37474F;" value="Cross-tool is the&lt;br&gt;structural advantage" vertex="1">
+          <mxGeometry height="35" width="120" x="360" y="387.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pr4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontSize=9;fontStyle=1;strokeWidth=1;fontColor=#37474F;" value="Community&lt;br&gt;is the moat" vertex="1">
+          <mxGeometry height="35" width="120" x="640" y="337.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pr5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontSize=9;fontStyle=1;strokeWidth=1;fontColor=#37474F;" value="Build for final&lt;br&gt;vision from day one" vertex="1">
+          <mxGeometry height="35" width="120" x="500" y="387.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pr7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontSize=9;fontStyle=1;strokeWidth=1;fontColor=#37474F;" value="Platform outlasts&lt;br&gt;any individual tool" vertex="1">
+          <mxGeometry height="35" width="120" x="640" y="387.5" as="geometry" />
+        </mxCell>
+        <mxCell id="punch" parent="1" style="text;html=1;fontSize=14;fontStyle=3;align=center;fontColor=#333;whiteSpace=wrap;" value="“If 10 of my tools are no longer reliable, I have tons of others.&lt;div&gt;Be adaptive enough to always see painful spots.”&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="410" x="355" y="470" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

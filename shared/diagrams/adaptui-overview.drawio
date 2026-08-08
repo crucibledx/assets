@@ -1,0 +1,119 @@
+<mxfile host="Electron">
+  <diagram name="AdaptUI Patterns" id="adaptui-overview">
+    <mxGraphModel dx="918" dy="719" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#333;" value="AdaptUI — Configuration-Driven React Component Library" vertex="1">
+          <mxGeometry height="35" width="650" x="160" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;fontSize=12;fontStyle=2;align=center;fontColor=#666666;whiteSpace=wrap;" value="Three architectural patterns, four articles, one library that demonstrates all of them" vertex="1">
+          <mxGeometry height="22" width="500" x="235" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="Pattern 1: Multi-Layer Config" vertex="1">
+          <mxGeometry height="150" width="270" x="30" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-l1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999;fontSize=9;strokeWidth=1;fontStyle=1;" value="Default Config&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;built into library&lt;/span&gt;" vertex="1">
+          <mxGeometry height="28" width="110" x="40" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-l2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;strokeWidth=1;fontStyle=1;" value="App Config&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;at initialization&lt;/span&gt;" vertex="1">
+          <mxGeometry height="28" width="110" x="40" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-l3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;strokeWidth=1;fontStyle=1;" value="Runtime Config&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;fetched from URL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="28" width="110" x="40" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-merge" parent="1" style="text;html=1;fontSize=9;fontStyle=2;fontColor=#9673a6;align=center;" value="deep merge → no rebuilds" vertex="1">
+          <mxGeometry height="20" width="130" x="160" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-result" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;strokeWidth=1;fontStyle=1;" value="Merged Config" vertex="1">
+          <mxGeometry height="28" width="80" x="210" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="e-l3-merge" edge="1" parent="1" source="p1-l3" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;flowAnimation=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="p1-result">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="Pattern 2: Declarative Form Dependencies" vertex="1">
+          <mxGeometry height="150" width="270" x="350" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-model" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;strokeWidth=1;align=left;spacingLeft=5;fontFamily=Courier New;" value="subscriptions: [{&lt;br&gt;&amp;nbsp; field: &quot;hasAddr&quot;,&lt;br&gt;&amp;nbsp; action: &quot;visible&quot;,&lt;br&gt;&amp;nbsp; when: val =&amp;gt; val&lt;br&gt;}]" vertex="1">
+          <mxGeometry height="70" width="130" x="360" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-benefits" parent="1" style="text;html=1;fontSize=9;align=left;fontColor=#333;whiteSpace=wrap;spacingLeft=3;" value="&amp;#10003; No useEffect chains&lt;br&gt;&amp;#10003; Cascading dropdowns&lt;br&gt;&amp;#10003; Scales to 100+ fields&lt;br&gt;&amp;#10003; Easy to test" vertex="1">
+          <mxGeometry height="60" width="120" x="500" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="Pattern 3: Component Wrappers" vertex="1">
+          <mxGeometry height="150" width="270" x="670" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-app" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#82b366;fontSize=10;fontStyle=1;strokeWidth=1;" value="Your App" vertex="1">
+          <mxGeometry height="28" width="80" x="680" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-adapt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;strokeWidth=2;" value="AdaptUI" vertex="1">
+          <mxGeometry height="28" width="80" x="790" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-mui" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;strokeWidth=1;" value="Material UI" vertex="1">
+          <mxGeometry height="28" width="80" x="700" y="171" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-alt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999;fontSize=9;fontStyle=2;strokeWidth=1;" value="Ant Design?" vertex="1">
+          <mxGeometry height="28" width="80" x="845" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="e-app-adapt" edge="1" parent="1" source="p3-app" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;flowAnimation=1;" target="p3-adapt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-adapt-mui" edge="1" parent="1" source="p3-adapt" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="p3-mui">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820.02" y="185.02" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-adapt-alt" edge="1" parent="1" source="p3-adapt" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#999;dashed=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="p3-alt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-point" parent="1" style="text;html=1;fontSize=9;fontStyle=2;fontColor=#2D7600;align=left;spacingLeft=3;" value="Switch libraries, zero app changes" vertex="1">
+          <mxGeometry height="25" width="150" x="730" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="articles-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontColor=#37474F;fontSize=12;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;" value="Article Series" vertex="1">
+          <mxGeometry height="90" width="770" x="100" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1;strokeWidth=1;" value="Article 0&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Self-Mounting Embeds&lt;/span&gt;" vertex="1">
+          <mxGeometry height="35" width="150" x="120" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;fontStyle=1;strokeWidth=1;" value="Article 1&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Multi-Layer Config&lt;/span&gt;" vertex="1">
+          <mxGeometry height="35" width="150" x="310" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" value="Article 2&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Declarative Form Deps&lt;/span&gt;" vertex="1">
+          <mxGeometry height="35" width="150" x="500" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;strokeWidth=1;" value="Article 3&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Component Wrappers&lt;/span&gt;" vertex="1">
+          <mxGeometry height="35" width="150" x="700" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="e-a0-a1" edge="1" parent="1" source="a0" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#9673a6;flowAnimation=1;fillColor=#e1d5e7;" target="a1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-a1-a2" edge="1" parent="1" source="a1" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;fillColor=#dae8fc;" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-a2-a3" edge="1" parent="1" source="a2" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;flowAnimation=1;fillColor=#d5e8d4;" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="use-cases" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999;fontSize=10;fontStyle=0;strokeWidth=1;fontColor=#666;align=left;spacingLeft=8;" value="&lt;b&gt;Use Cases:&lt;/b&gt; White-label SaaS &amp;nbsp;|&amp;nbsp; Multi-brand apps &amp;nbsp;|&amp;nbsp; Micro-frontends &amp;nbsp;|&amp;nbsp; Complex forms &amp;nbsp;|&amp;nbsp; UI library migration" vertex="1">
+          <mxGeometry height="25" width="500" x="235" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="punch" parent="1" style="text;html=1;fontSize=13;fontStyle=3;align=center;fontColor=#333;whiteSpace=wrap;" value="&amp;ldquo;You don&amp;rsquo;t need AdaptUI to use these patterns. They&amp;rsquo;re general architectural approaches. AdaptUI demonstrates one implementation.&amp;rdquo;" vertex="1">
+          <mxGeometry height="30" width="920" x="25" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="RRUr9qQ_ko7kBdJGAGa8-3" edge="1" parent="1" source="p1-l2" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="p1-result">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="175.5" as="sourcePoint" />
+            <mxPoint x="260" y="154.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RRUr9qQ_ko7kBdJGAGa8-4" edge="1" parent="1" source="p1-l1" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;flowAnimation=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="p1-result">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="224" as="sourcePoint" />
+            <mxPoint x="220" y="189" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
