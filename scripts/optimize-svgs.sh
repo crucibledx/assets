@@ -86,12 +86,12 @@ while IFS= read -r file; do
   if [[ "$DRY_RUN" == true ]]; then
     # Run svgo to stdout, measure size without writing
     after=$(bunx svgo "$file" -o - 2>/dev/null | wc -c | tr -d ' ')
-    ratio=$(echo "scale=0; (1 - $after / $before) * 100" | bc 2>/dev/null || echo "?")
+    ratio=$(echo "scale=0; ($before - $after) * 100 / $before" | bc 2>/dev/null || echo "?")
     echo "▸ $rel: $(human_size "$before") → $(human_size "$after") (-${ratio}%) [dry-run]"
   else
     bunx svgo "$file" -o "$file" --quiet 2>/dev/null
     after=$(wc -c < "$file" | tr -d ' ')
-    ratio=$(echo "scale=0; (1 - $after / $before) * 100" | bc 2>/dev/null || echo "?")
+    ratio=$(echo "scale=0; ($before - $after) * 100 / $before" | bc 2>/dev/null || echo "?")
     echo "▸ $rel: $(human_size "$before") → $(human_size "$after") (-${ratio}%)"
   fi
 

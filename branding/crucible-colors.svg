@@ -1,189 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560">
-  <defs>
-    <linearGradient id="bgSheet" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0D1117"/>
-      <stop offset="100%" stop-color="#111827"/>
-    </linearGradient>
-    <linearGradient id="moltenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#C13800"/>
-      <stop offset="50%" stop-color="#FF6B1A"/>
-      <stop offset="100%" stop-color="#FFB347"/>
-    </linearGradient>
-    <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1F2937" stroke-width="0.5"/>
-    </pattern>
-  </defs>
-
-  <!-- Background -->
-  <rect width="800" height="560" fill="url(#bgSheet)"/>
-  <rect width="800" height="560" fill="url(#grid2)" opacity="0.4"/>
-
-  <!-- Corner marks -->
-  <path d="M16,16 L16,6 L26,6" fill="none" stroke="#2D3748" stroke-width="1.5"/>
-  <path d="M784,16 L784,6 L774,6" fill="none" stroke="#2D3748" stroke-width="1.5"/>
-  <path d="M16,544 L16,554 L26,554" fill="none" stroke="#2D3748" stroke-width="1.5"/>
-  <path d="M784,544 L784,554 L774,554" fill="none" stroke="#2D3748" stroke-width="1.5"/>
-
-  <!-- Title -->
-  <text x="40" y="52" font-family="'Helvetica Neue', Arial, sans-serif"
-        font-size="18" font-weight="700" letter-spacing="4" fill="#E2E8F0">CRUCIBLE</text>
-  <text x="40" y="68" font-family="'Helvetica Neue', Arial, sans-serif"
-        font-size="9" letter-spacing="4" fill="#4A5568">BRAND COLOR SYSTEM</text>
-
-  <!-- Molten accent bar -->
-  <rect x="40" y="76" width="340" height="2" fill="url(#moltenGrad)" rx="1"/>
-
-  <!-- ========== SECTION 1: MOLTEN (Primary) ========== -->
-  <text x="40" y="116" font-family="'Courier New', monospace"
-        font-size="9" letter-spacing="3" fill="#4A5568">01 · MOLTEN — PRIMARY ACCENT</text>
-
-  <!-- Molten 900 -->
-  <rect x="40" y="126" width="80" height="64" rx="3" fill="#7A1F00"/>
-  <text x="80" y="175" font-family="'Courier New', monospace" font-size="8" fill="#FF9050" text-anchor="middle">900</text>
-  <text x="80" y="204" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#7A1F00</text>
-
-  <!-- Molten 700 -->
-  <rect x="130" y="126" width="80" height="64" rx="3" fill="#C13800"/>
-  <text x="170" y="175" font-family="'Courier New', monospace" font-size="8" fill="#FFB070" text-anchor="middle">700</text>
-  <text x="170" y="204" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#C13800</text>
-
-  <!-- Molten 500 — PRIMARY -->
-  <rect x="220" y="118" width="90" height="80" rx="3" fill="#E84D00"/>
-  <rect x="220" y="118" width="90" height="80" rx="3" fill="none" stroke="#FF6B1A" stroke-width="1.5"/>
-  <text x="265" y="153" font-family="'Courier New', monospace" font-size="8" fill="#FFD0A0" text-anchor="middle">500</text>
-  <text x="265" y="164" font-family="'Courier New', monospace" font-size="7" fill="#FFD0A0" text-anchor="middle">PRIMARY</text>
-  <text x="265" y="212" font-family="'Courier New', monospace" font-size="8" fill="#718096" text-anchor="middle">#E84D00</text>
-
-  <!-- Molten 400 -->
-  <rect x="320" y="126" width="80" height="64" rx="3" fill="#FF6B1A"/>
-  <text x="360" y="175" font-family="'Courier New', monospace" font-size="8" fill="#7A1F00" text-anchor="middle">400</text>
-  <text x="360" y="204" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#FF6B1A</text>
-
-  <!-- Molten 200 -->
-  <rect x="410" y="126" width="80" height="64" rx="3" fill="#FFA940"/>
-  <text x="450" y="175" font-family="'Courier New', monospace" font-size="8" fill="#7A2800" text-anchor="middle">200</text>
-  <text x="450" y="204" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#FFA940</text>
-
-  <!-- Molten 100 -->
-  <rect x="500" y="126" width="80" height="64" rx="3" fill="#FFD580"/>
-  <text x="540" y="175" font-family="'Courier New', monospace" font-size="8" fill="#7A3000" text-anchor="middle">100</text>
-  <text x="540" y="204" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#FFD580</text>
-
-  <!-- ========== SECTION 2: STEEL (Neutral) ========== -->
-  <text x="40" y="240" font-family="'Courier New', monospace"
-        font-size="9" letter-spacing="3" fill="#4A5568">02 · STEEL — NEUTRAL SCALE</text>
-
-  <!-- Steel 950 -->
-  <rect x="40" y="250" width="70" height="56" rx="3" fill="#0D1117"/>
-  <rect x="40" y="250" width="70" height="56" rx="3" fill="none" stroke="#1F2937" stroke-width="1"/>
-  <text x="75" y="292" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">950</text>
-  <text x="75" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#0D1117</text>
-
-  <!-- Steel 900 -->
-  <rect x="120" y="250" width="70" height="56" rx="3" fill="#111827"/>
-  <text x="155" y="292" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">900</text>
-  <text x="155" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#111827</text>
-
-  <!-- Steel 800 -->
-  <rect x="200" y="250" width="70" height="56" rx="3" fill="#1F2937"/>
-  <text x="235" y="292" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">800</text>
-  <text x="235" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#1F2937</text>
-
-  <!-- Steel 700 -->
-  <rect x="280" y="250" width="70" height="56" rx="3" fill="#2D3748"/>
-  <text x="315" y="292" font-family="'Courier New', monospace" font-size="8" fill="#718096" text-anchor="middle">700</text>
-  <text x="315" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#2D3748</text>
-
-  <!-- Steel 600 -->
-  <rect x="360" y="250" width="70" height="56" rx="3" fill="#3D4A5C"/>
-  <text x="395" y="292" font-family="'Courier New', monospace" font-size="8" fill="#718096" text-anchor="middle">600</text>
-  <text x="395" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#3D4A5C</text>
-
-  <!-- Steel 500 -->
-  <rect x="440" y="250" width="70" height="56" rx="3" fill="#4A5568"/>
-  <text x="475" y="292" font-family="'Courier New', monospace" font-size="8" fill="#A0AEC0" text-anchor="middle">500</text>
-  <text x="475" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#4A5568</text>
-
-  <!-- Steel 400 -->
-  <rect x="520" y="250" width="70" height="56" rx="3" fill="#718096"/>
-  <text x="555" y="292" font-family="'Courier New', monospace" font-size="8" fill="#1A202C" text-anchor="middle">400</text>
-  <text x="555" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#718096</text>
-
-  <!-- Steel 300 -->
-  <rect x="600" y="250" width="70" height="56" rx="3" fill="#A0AEC0"/>
-  <text x="635" y="292" font-family="'Courier New', monospace" font-size="8" fill="#1A202C" text-anchor="middle">300</text>
-  <text x="635" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#A0AEC0</text>
-
-  <!-- Steel 100 -->
-  <rect x="680" y="250" width="70" height="56" rx="3" fill="#E2E8F0"/>
-  <text x="715" y="292" font-family="'Courier New', monospace" font-size="8" fill="#1A202C" text-anchor="middle">100</text>
-  <text x="715" y="318" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#E2E8F0</text>
-
-  <!-- ========== SECTION 3: SEMANTIC COLORS ========== -->
-  <text x="40" y="358" font-family="'Courier New', monospace"
-        font-size="9" letter-spacing="3" fill="#4A5568">03 · SEMANTIC — STATUS COLORS</text>
-
-  <!-- Success -->
-  <rect x="40" y="368" width="100" height="50" rx="3" fill="#1A3328"/>
-  <rect x="40" y="368" width="100" height="4" rx="2" fill="#2ECC71"/>
-  <text x="90" y="393" font-family="'Courier New', monospace" font-size="8" fill="#2ECC71" text-anchor="middle">SUCCESS</text>
-  <text x="90" y="430" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#2ECC71</text>
-
-  <!-- Warning -->
-  <rect x="152" y="368" width="100" height="50" rx="3" fill="#2D2010"/>
-  <rect x="152" y="368" width="100" height="4" rx="2" fill="#FFA940"/>
-  <text x="202" y="393" font-family="'Courier New', monospace" font-size="8" fill="#FFA940" text-anchor="middle">WARNING</text>
-  <text x="202" y="430" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#FFA940</text>
-
-  <!-- Error -->
-  <rect x="264" y="368" width="100" height="50" rx="3" fill="#2D1015"/>
-  <rect x="264" y="368" width="100" height="4" rx="2" fill="#E53E3E"/>
-  <text x="314" y="393" font-family="'Courier New', monospace" font-size="8" fill="#E53E3E" text-anchor="middle">ERROR</text>
-  <text x="314" y="430" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#E53E3E</text>
-
-  <!-- Info -->
-  <rect x="376" y="368" width="100" height="50" rx="3" fill="#102030"/>
-  <rect x="376" y="368" width="100" height="4" rx="2" fill="#4299E1"/>
-  <text x="426" y="393" font-family="'Courier New', monospace" font-size="8" fill="#4299E1" text-anchor="middle">INFO</text>
-  <text x="426" y="430" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#4299E1</text>
-
-  <!-- Muted -->
-  <rect x="488" y="368" width="100" height="50" rx="3" fill="#1A1F2A"/>
-  <rect x="488" y="368" width="100" height="4" rx="2" fill="#4A5568"/>
-  <text x="538" y="393" font-family="'Courier New', monospace" font-size="8" fill="#718096" text-anchor="middle">MUTED</text>
-  <text x="538" y="430" font-family="'Courier New', monospace" font-size="8" fill="#4A5568" text-anchor="middle">#4A5568</text>
-
-  <!-- ========== SECTION 4: USAGE RULES ========== -->
-  <text x="40" y="470" font-family="'Courier New', monospace"
-        font-size="9" letter-spacing="3" fill="#4A5568">04 · USAGE</text>
-
-  <text x="40" y="488" font-family="'Helvetica Neue', Arial, sans-serif"
-        font-size="10" fill="#718096">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560"><defs><linearGradient id="a" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#0d1117"/><stop offset="100%" stop-color="#111827"/></linearGradient><linearGradient id="c" x1="0%" x2="100%" y1="0%" y2="0%"><stop offset="0%" stop-color="#c13800"/><stop offset="50%" stop-color="#ff6b1a"/><stop offset="100%" stop-color="#ffb347"/></linearGradient><pattern id="b" width="40" height="40" patternUnits="userSpaceOnUse"><path fill="none" stroke="#1f2937" stroke-width=".5" d="M40 0H0v40"/></pattern></defs><path fill="url(#a)" d="M0 0h800v560H0z"/><path fill="url(#b)" d="M0 0h800v560H0z" opacity=".4"/><path fill="none" stroke="#2d3748" stroke-width="1.5" d="M16 16V6h10M784 16V6h-10M16 544v10h10M784 544v10h-10"/><text x="40" y="52" fill="#e2e8f0" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4">CRUCIBLE</text><text x="40" y="68" fill="#4a5568" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" letter-spacing="4">BRAND COLOR SYSTEM</text><rect width="340" height="2" x="40" y="76" fill="url(#c)" rx="1"/><text x="40" y="116" fill="#4a5568" font-family="'Courier New', monospace" font-size="9" letter-spacing="3">01 · MOLTEN — PRIMARY ACCENT</text><rect width="80" height="64" x="40" y="126" fill="#7a1f00" rx="3"/><text x="80" y="175" fill="#ff9050" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">900</text><text x="80" y="204" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#7A1F00</text><rect width="80" height="64" x="130" y="126" fill="#c13800" rx="3"/><text x="170" y="175" fill="#ffb070" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">700</text><text x="170" y="204" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#C13800</text><rect width="90" height="80" x="220" y="118" fill="#e84d00" rx="3"/><rect width="90" height="80" x="220" y="118" fill="none" stroke="#ff6b1a" stroke-width="1.5" rx="3"/><text x="265" y="153" fill="#ffd0a0" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">500</text><text x="265" y="164" fill="#ffd0a0" font-family="'Courier New', monospace" font-size="7" text-anchor="middle">PRIMARY</text><text x="265" y="212" fill="#718096" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#E84D00</text><rect width="80" height="64" x="320" y="126" fill="#ff6b1a" rx="3"/><text x="360" y="175" fill="#7a1f00" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">400</text><text x="360" y="204" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#FF6B1A</text><rect width="80" height="64" x="410" y="126" fill="#ffa940" rx="3"/><text x="450" y="175" fill="#7a2800" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">200</text><text x="450" y="204" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#FFA940</text><rect width="80" height="64" x="500" y="126" fill="#ffd580" rx="3"/><text x="540" y="175" fill="#7a3000" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">100</text><text x="540" y="204" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#FFD580</text><text x="40" y="240" fill="#4a5568" font-family="'Courier New', monospace" font-size="9" letter-spacing="3">02 · STEEL — NEUTRAL SCALE</text><rect width="70" height="56" x="40" y="250" fill="#0d1117" rx="3"/><rect width="70" height="56" x="40" y="250" fill="none" stroke="#1f2937" rx="3"/><text x="75" y="292" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">950</text><text x="75" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#0D1117</text><rect width="70" height="56" x="120" y="250" fill="#111827" rx="3"/><text x="155" y="292" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">900</text><text x="155" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#111827</text><rect width="70" height="56" x="200" y="250" fill="#1f2937" rx="3"/><text x="235" y="292" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">800</text><text x="235" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#1F2937</text><rect width="70" height="56" x="280" y="250" fill="#2d3748" rx="3"/><text x="315" y="292" fill="#718096" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">700</text><text x="315" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#2D3748</text><rect width="70" height="56" x="360" y="250" fill="#3d4a5c" rx="3"/><text x="395" y="292" fill="#718096" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">600</text><text x="395" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#3D4A5C</text><rect width="70" height="56" x="440" y="250" fill="#4a5568" rx="3"/><text x="475" y="292" fill="#a0aec0" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">500</text><text x="475" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#4A5568</text><rect width="70" height="56" x="520" y="250" fill="#718096" rx="3"/><text x="555" y="292" fill="#1a202c" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">400</text><text x="555" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#718096</text><rect width="70" height="56" x="600" y="250" fill="#a0aec0" rx="3"/><text x="635" y="292" fill="#1a202c" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">300</text><text x="635" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#A0AEC0</text><rect width="70" height="56" x="680" y="250" fill="#e2e8f0" rx="3"/><text x="715" y="292" fill="#1a202c" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">100</text><text x="715" y="318" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#E2E8F0</text><text x="40" y="358" fill="#4a5568" font-family="'Courier New', monospace" font-size="9" letter-spacing="3">03 · SEMANTIC — STATUS COLORS</text><rect width="100" height="50" x="40" y="368" fill="#1a3328" rx="3"/><rect width="100" height="4" x="40" y="368" fill="#2ecc71" rx="2"/><text x="90" y="393" fill="#2ecc71" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">SUCCESS</text><text x="90" y="430" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#2ECC71</text><rect width="100" height="50" x="152" y="368" fill="#2d2010" rx="3"/><rect width="100" height="4" x="152" y="368" fill="#ffa940" rx="2"/><text x="202" y="393" fill="#ffa940" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">WARNING</text><text x="202" y="430" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#FFA940</text><rect width="100" height="50" x="264" y="368" fill="#2d1015" rx="3"/><rect width="100" height="4" x="264" y="368" fill="#e53e3e" rx="2"/><text x="314" y="393" fill="#e53e3e" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">ERROR</text><text x="314" y="430" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#E53E3E</text><rect width="100" height="50" x="376" y="368" fill="#102030" rx="3"/><rect width="100" height="4" x="376" y="368" fill="#4299e1" rx="2"/><text x="426" y="393" fill="#4299e1" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">INFO</text><text x="426" y="430" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#4299E1</text><rect width="100" height="50" x="488" y="368" fill="#1a1f2a" rx="3"/><rect width="100" height="4" x="488" y="368" fill="#4a5568" rx="2"/><text x="538" y="393" fill="#718096" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">MUTED</text><text x="538" y="430" fill="#4a5568" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">#4A5568</text><text x="40" y="470" fill="#4a5568" font-family="'Courier New', monospace" font-size="9" letter-spacing="3">04 · USAGE</text><text x="40" y="488" fill="#718096" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10">
     <tspan x="40" dy="0">Background</tspan>
     <tspan x="40" dy="14">Surface</tspan>
     <tspan x="40" dy="14">Border</tspan>
     <tspan x="40" dy="14">Body text</tspan>
-  </text>
-  <text x="120" y="488" font-family="'Courier New', monospace"
-        font-size="10" fill="#4A5568">
+  </text><text x="120" y="488" fill="#4a5568" font-family="'Courier New', monospace" font-size="10">
     <tspan x="120" dy="0">Steel 950 / 900   #0D1117 · #111827</tspan>
     <tspan x="120" dy="14">Steel 800 / 700   #1F2937 · #2D3748</tspan>
     <tspan x="120" dy="14">Steel 700 / 600   #2D3748 · #3D4A5C</tspan>
     <tspan x="120" dy="14">Steel 300 / 400   #A0AEC0 · #718096</tspan>
-  </text>
-
-  <text x="480" y="488" font-family="'Helvetica Neue', Arial, sans-serif"
-        font-size="10" fill="#718096">
+  </text><text x="480" y="488" fill="#718096" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10">
     <tspan x="480" dy="0">Primary CTA</tspan>
     <tspan x="480" dy="14">Hover / active</tspan>
     <tspan x="480" dy="14">Headings</tspan>
     <tspan x="480" dy="14">Code / mono</tspan>
-  </text>
-  <text x="570" y="488" font-family="'Courier New', monospace"
-        font-size="10" fill="#4A5568">
+  </text><text x="570" y="488" fill="#4a5568" font-family="'Courier New', monospace" font-size="10">
     <tspan x="570" dy="0">Molten 500   #E84D00</tspan>
     <tspan x="570" dy="14">Molten 400   #FF6B1A</tspan>
     <tspan x="570" dy="14">Steel 100    #E2E8F0</tspan>
     <tspan x="570" dy="14">Molten 200   #FFA940</tspan>
-  </text>
-</svg>
+  </text></svg>

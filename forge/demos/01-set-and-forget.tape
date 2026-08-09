@@ -10,9 +10,9 @@
 #   - No existing .crucible/forge.config.yaml
 #   - VHS installed: brew install charmbracelet/tap/vhs
 #
-# Run: docs/gifs/generate.sh 01-set-and-forget
+# Run: scripts/generate-demos.sh forge/demos/01-set-and-forget.tape
 
-Output docs/gifs/01-set-and-forget-{{VARIANT}}.gif
+Output forge/demos/{{VARIANT}}/01-set-and-forget.gif
 
 Set Shell zsh
 Set Theme "{{THEME}}"

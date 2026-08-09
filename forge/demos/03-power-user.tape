@@ -20,9 +20,9 @@
 #   - An existing .crucible/forge.config.yaml with one source
 #   - VHS installed: brew install charmbracelet/tap/vhs
 #
-# Run: docs/gifs/generate.sh 03-power-user
+# Run: scripts/generate-demos.sh forge/demos/03-power-user.tape
 
-Output docs/gifs/03-power-user-{{VARIANT}}.gif
+Output forge/demos/{{VARIANT}}/03-power-user.gif
 
 Set Shell zsh
 Set Theme "{{THEME}}"

@@ -10,9 +10,9 @@
 #   - A locally modified file (to show drift)
 #   - VHS installed: brew install charmbracelet/tap/vhs
 #
-# Run: docs/gifs/generate.sh 02-easy-updates
+# Run: scripts/generate-demos.sh forge/demos/02-easy-updates.tape
 
-Output docs/gifs/02-easy-updates-{{VARIANT}}.gif
+Output forge/demos/{{VARIANT}}/02-easy-updates.gif
 
 Set Shell zsh
 Set Theme "{{THEME}}"
