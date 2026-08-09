@@ -1,0 +1,13 @@
+version: "1"
+assistants:
+  - id: claude-code
+    enabled: true
+  - id: cursor
+    enabled: true
+sources:
+  - name: default
+    type: git
+    url: https://github.com/crucibledx/forge-skills-starter.git
+    branch: main
+schedule:
+  cron: "0 9 * * 1-5"
