@@ -42,13 +42,13 @@ Theme subfolders (`dark/`, `light/`, etc.) are **optional** — only create them
 From other repos, use raw GitHub URLs:
 
 ```markdown
-![diagram](https://raw.githubusercontent.com/crucibledx/assets/main/forge/diagrams/dark/forge-sync-flow.svg)
+![diagram](https://github.com/crucibledx/assets/raw/main/forge/diagrams/dark/forge-sync-flow.svg)
 ```
 
 For immutable references, use a tag:
 
 ```markdown
-![diagram](https://raw.githubusercontent.com/crucibledx/assets/v3/forge/diagrams/dark/forge-sync-flow.svg)
+![diagram](https://github.com/crucibledx/assets/raw/v3/forge/diagrams/dark/forge-sync-flow.svg)
 ```
 
 ## Versioning
