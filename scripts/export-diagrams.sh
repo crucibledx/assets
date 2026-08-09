@@ -11,7 +11,7 @@
 #   scripts/export-diagrams.sh --scale 2                    # PNG scale factor (default: 2)
 #   scripts/export-diagrams.sh --changed                    # only changed since last commit
 #
-# Outputs land next to the source file (e.g., forge/diagrams/flow.svg).
+# Outputs land in the light/ subdirectory (e.g., forge/diagrams/light/flow.svg).
 # For multi-page files, each page exports as: <page-name>.svg
 #
 # Requires: draw.io desktop app (https://github.com/jgraph/drawio-desktop)
@@ -103,10 +103,13 @@ export_diagram() {
   local num_pages
   num_pages=$(count_pages "$file")
 
+  local light_dir="$dir/light"
+  mkdir -p "$light_dir"
+
   if [[ "$num_pages" -le 1 ]]; then
     # Single page — output named after the file
     local name="$(basename "$file" .drawio)"
-    local out="$dir/${name}.${FORMAT}"
+    local out="$light_dir/${name}.${FORMAT}"
     local rel="${out#$REPO_ROOT/}"
     echo "▸ Exporting $(basename "$file") → $rel"
     "$DRAWIO_CMD" -x -f "$FORMAT" -b 10 --scale "$SCALE" -o "$out" "$file" 2>/dev/null
@@ -121,7 +124,7 @@ export_diagram() {
     # Sanitize page name for filename (spaces → dashes, lowercase)
     local safe_name
     safe_name=$(echo "$page_name" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd 'a-z0-9-')
-    local out="$dir/${safe_name}.${FORMAT}"
+    local out="$light_dir/${safe_name}.${FORMAT}"
     local rel="${out#$REPO_ROOT/}"
     echo "▸ Exporting $(basename "$file") [page: $page_name] → $rel"
     "$DRAWIO_CMD" -x -f "$FORMAT" -p "$page_index" -b 10 --scale "$SCALE" -o "$out" "$file" 2>/dev/null

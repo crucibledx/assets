@@ -10,10 +10,12 @@ Centralized visual assets for all Crucible products. Single source of truth — 
     source-file.drawio          ← editable source
     source-file.tape            ← editable source
     fixtures/                   ← test data (for demos)
-    dark/
-      output-file.svg           ← themed output
     light/
-      output-file.gif           ← themed output
+      output-file.svg           ← light-theme output (primary)
+      output-file.gif           ← light-theme output
+    dark/
+      output-file.svg           ← dark-theme output (generated)
+      output-file.gif           ← dark-theme output
 ```
 
 ### Categories
@@ -35,20 +37,32 @@ Centralized visual assets for all Crucible products. Single source of truth — 
 
 ### Theme Folders
 
-Theme subfolders (`dark/`, `light/`, etc.) are **optional** — only create them when an asset has themed variants. Theme-neutral outputs sit directly in the asset-type folder alongside sources.
+All diagram and demo outputs live in `light/` and `dark/` subfolders. Light variants are the primary source — dark SVGs are **generated** from them (see below).
 
 ## Referencing Assets
 
 From other repos, use raw GitHub URLs:
 
 ```markdown
-![diagram](https://github.com/crucibledx/assets/raw/main/forge/diagrams/dark/forge-sync-flow.svg)
+![diagram](https://github.com/crucibledx/assets/raw/main/platform/diagrams/light/platform-flow.svg)
 ```
+
+For dark/light theme switching in GitHub READMEs, use `<picture>`:
+
+```html
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/crucibledx/assets/raw/main/platform/diagrams/dark/platform-flow.svg">
+    <img alt="Platform Flow" src="https://github.com/crucibledx/assets/raw/main/platform/diagrams/light/platform-flow.svg">
+</picture>
+```
+
+For sites with built-in CSS inversion (like the Crucible website), reference `light/` only — the site handles dark mode via CSS `filter: invert(1) hue-rotate(180deg)`.
 
 For immutable references, use a tag:
 
 ```markdown
-![diagram](https://github.com/crucibledx/assets/raw/v3/forge/diagrams/dark/forge-sync-flow.svg)
+![diagram](https://github.com/crucibledx/assets/raw/v3/platform/diagrams/light/platform-flow.svg)
 ```
 
 ## Versioning
@@ -77,26 +91,38 @@ scripts/generate-demos.sh --changed                             # only changed .
 
 ### Diagrams
 
-**For simple, non-animated, theme-neutral diagrams** — use the script:
+**Step 1 — Export light SVGs from draw.io:**
+
+Use the script for batch export:
 
 ```bash
 scripts/export-diagrams.sh                                      # all diagrams
-scripts/export-diagrams.sh forge                                # forge category only
-scripts/export-diagrams.sh forge/diagrams/flow.drawio           # single file
+scripts/export-diagrams.sh platform                             # platform category only
+scripts/export-diagrams.sh platform/diagrams/flow.drawio        # single file
 scripts/export-diagrams.sh --format png --scale 2               # PNG at 2x
 ```
 
-**For animated diagrams or themed (dark/light) exports** — export manually through draw.io:
+Or export manually through draw.io desktop:
 
 1. Open the `.drawio` file in draw.io desktop
 2. **File → Export As → SVG**
 3. Settings:
     - **Zoom**: 300% (for sharper output)
-    - **Appearance**: choose `Light` or `Dark` explicitly — **do NOT use Auto** (it embeds both themes in one SVG, making it harder to control in web and elsewhere)
+    - **Appearance**: `Light` — **always export light only**
     - **Include a copy of my diagram**: ❌ uncheck (keeps the file clean)
     - **Embed Images**: ❌ uncheck
     - **Embed Fonts**: ❌ uncheck (smaller output size)
-4. Save to the appropriate theme folder (e.g., `forge/diagrams/dark/flow.svg`)
+4. Save to the `light/` folder (e.g., `platform/diagrams/light/flow.svg`)
+
+**Step 2 — Generate dark variants:**
+
+Dark SVGs are generated programmatically from light SVGs by injecting `filter: invert(1) hue-rotate(180deg)` — the same transform used by the Crucible website CSS. Never export dark theme from draw.io (it looks ugly).
+
+```bash
+scripts/generate-dark-svgs.sh                                   # all light SVGs → dark/
+scripts/generate-dark-svgs.sh platform                          # platform category only
+scripts/generate-dark-svgs.sh platform/diagrams/light/flow.svg  # single file
+```
 
 ### SVG Optimization
 
