@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 #
-# Generate dark + light GIF variants from .tape templates.
+# Generate dark + light demo variants from .tape templates.
 #
 # Usage:
-#   scripts/generate-demos.sh                                    # all tapes, both themes
+#   scripts/generate-demos.sh                                    # all tapes, both themes, GIF
 #   scripts/generate-demos.sh forge                              # only forge/ category
 #   scripts/generate-demos.sh forge/demos/01-set-and-forget.tape # single tape
 #   scripts/generate-demos.sh --dark                             # all tapes, dark only
 #   scripts/generate-demos.sh --light forge                      # forge category, light only
+#   scripts/generate-demos.sh --mp4                              # output MP4 instead of GIF
+#   scripts/generate-demos.sh --mp4 --dark forge                 # combine flags freely
 #   scripts/generate-demos.sh --changed                          # only changed since last commit
 #
 # Tapes use {{THEME}} and {{VARIANT}} placeholders.
-# Output goes to <category>/demos/<variant>/<basename>.gif
+# Output goes to <category>/demos/<variant>/<basename>.<format>
 #
 # Requires: VHS (brew install charmbracelet/tap/vhs)
 
@@ -32,6 +34,7 @@ theme_for() {
 
 # Parse arguments
 VARIANTS=("dark" "light")
+FORMAT="gif"
 FILTER=""
 CHANGED_ONLY=false
 
@@ -39,6 +42,8 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --dark)    VARIANTS=("dark"); shift ;;
     --light)   VARIANTS=("light"); shift ;;
+    --mp4)     FORMAT="mp4"; shift ;;
+    --gif)     FORMAT="gif"; shift ;;
     --changed) CHANGED_ONLY=true; shift ;;
     *)         FILTER="$1"; shift ;;
   esac
@@ -82,7 +87,7 @@ generate() {
   local tape_dir="$(dirname "$tape")"
   local basename="$(basename "$tape" .tape)"
   local out_dir="$tape_dir/$variant"
-  local out_file="$out_dir/${basename}.gif"
+  local out_file="$out_dir/${basename}.${FORMAT}"
   local rel="${out_file#$REPO_ROOT/}"
 
   mkdir -p "$out_dir"
@@ -92,7 +97,7 @@ generate() {
   sed \
     -e "s|{{THEME}}|$theme|g" \
     -e "s|{{VARIANT}}|$variant|g" \
-    -e "s|^Output .*|Output $out_file|" \
+    -e "s|^Output .*|Output \"$out_file\"|" \
     "$tape" > "$tmp_tape"
 
   echo "▸ Generating $rel ..."
@@ -117,4 +122,4 @@ while IFS= read -r tape; do
 done <<< "$tapes"
 
 echo ""
-echo "Done — generated $count GIF(s)."
+echo "Done — generated $count $(echo "$FORMAT" | tr '[:lower:]' '[:upper:]')(s)."

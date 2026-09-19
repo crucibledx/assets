@@ -1,0 +1,116 @@
+<mxfile host="Electron">
+  <diagram name="Compiler Pipeline" id="compiler-pipeline">
+    <mxGraphModel dx="1138" dy="607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bg" parent="1" style="whiteSpace=wrap;html=1;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="500" width="1000" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#1A237E;" value="Forge — Compiler Pipeline" vertex="1">
+          <mxGeometry height="40" width="420" x="290" y="12" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;fontSize=13;fontStyle=2;align=center;fontColor=#3F51B5;whiteSpace=wrap;" value="From file copier to context compiler. Four new stages, zero breaking changes." vertex="1">
+          <mxGeometry height="25" width="550" x="225" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="current-label" parent="1" style="text;html=1;fontSize=11;fontStyle=1;align=center;fontColor=#82b366;whiteSpace=wrap;" value="CURRENT (v0.6)" vertex="1">
+          <mxGeometry height="20" width="120" x="440" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="source-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;strokeWidth=2;fontColor=#2D7600;" value="Source.load()&lt;br&gt;&lt;i style=&quot;font-size:9px;font-weight:normal&quot;&gt;Git / Local / Smithery&lt;/i&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="50" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="filter-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;strokeWidth=2;fontColor=#2D7600;" value="Filter&lt;br&gt;&lt;i style=&quot;font-size:9px;font-weight:normal&quot;&gt;include / exclude / map&lt;/i&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="240" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="resolve-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;strokeWidth=2;fontColor=#2D7600;" value="Resolve Targets&lt;br&gt;&lt;i style=&quot;font-size:9px;font-weight:normal&quot;&gt;layout detection + transforms&lt;/i&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="430" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="plan-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;strokeWidth=2;fontColor=#2D7600;" value="Build Plan&lt;br&gt;&lt;i style=&quot;font-size:9px;font-weight:normal&quot;&gt;diff, conflicts, mutations&lt;/i&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="620" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="write-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;strokeWidth=2;fontColor=#2D7600;" value="Write Files&lt;br&gt;&lt;i style=&quot;font-size:9px;font-weight:normal&quot;&gt;apply mutations + sync state&lt;/i&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="810" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="e-src-filter" edge="1" parent="1" source="source-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="filter-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-filter-resolve" edge="1" parent="1" source="filter-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="resolve-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-resolve-plan" edge="1" parent="1" source="resolve-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="plan-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-plan-write" edge="1" parent="1" source="plan-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="write-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="compiler-label" parent="1" style="text;html=1;fontSize=11;fontStyle=1;align=center;fontColor=#3F51B5;whiteSpace=wrap;" value="COMPILER (v0.8+) — four new stages inserted between Filter and Resolve" vertex="1">
+          <mxGeometry height="20" width="500" x="250" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="parse-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=13;fontStyle=1;strokeWidth=3;fontColor=#1A237E;verticalAlign=top;spacingTop=5;" value="PARSE" vertex="1">
+          <mxGeometry height="130" width="200" x="20" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="parse-desc" parent="1" style="text;html=1;fontSize=9;align=left;fontColor=#1A237E;whiteSpace=wrap;spacingLeft=3;" value="&lt;b&gt;v0.8 — Frontmatter Parser&lt;/b&gt;&lt;br&gt;Extract YAML metadata from skills:&lt;br&gt;name, depends, tags, context,&lt;br&gt;priority, budget.&lt;br&gt;&lt;br&gt;SourceFile[] &amp;rarr; SkillNode[]" vertex="1">
+          <mxGeometry height="80" width="185" x="27" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="analyze-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=13;fontStyle=1;strokeWidth=3;fontColor=#1A237E;verticalAlign=top;spacingTop=5;" value="ANALYZE" vertex="1">
+          <mxGeometry height="130" width="220" x="260" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="analyze-desc" parent="1" style="text;html=1;fontSize=9;align=left;fontColor=#1A237E;whiteSpace=wrap;spacingLeft=3;" value="&lt;b&gt;v0.9 — Skill Graph&lt;/b&gt;&lt;br&gt;Build DAG from depends fields.&lt;br&gt;Topo sort, cycle detection.&lt;br&gt;&lt;br&gt;&lt;b&gt;v0.10 — Project Context&lt;/b&gt;&lt;br&gt;Detect languages/frameworks&lt;br&gt;from marker files (pom.xml, etc.)" vertex="1">
+          <mxGeometry height="90" width="205" x="267" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="optimize-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=13;fontStyle=1;strokeWidth=3;fontColor=#1A237E;verticalAlign=top;spacingTop=5;" value="OPTIMIZE" vertex="1">
+          <mxGeometry height="130" width="220" x="520" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="optimize-desc" parent="1" style="text;html=1;fontSize=9;align=left;fontColor=#1A237E;whiteSpace=wrap;spacingLeft=3;" value="&lt;b&gt;v0.10 — Tree-Shaking&lt;/b&gt;&lt;br&gt;Remove skills irrelevant to project.&lt;br&gt;Dependency-pull protection.&lt;br&gt;&lt;br&gt;&lt;b&gt;v0.11 — Token Budgeting&lt;/b&gt;&lt;br&gt;Enforce per-agent limits.&lt;br&gt;Priority-ordered dropping." vertex="1">
+          <mxGeometry height="90" width="205" x="527" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="emit-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=13;fontStyle=1;strokeWidth=3;fontColor=#1A237E;verticalAlign=top;spacingTop=5;" value="EMIT" vertex="1">
+          <mxGeometry height="130" width="200" x="780" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="emit-desc" parent="1" style="text;html=1;fontSize=9;align=left;fontColor=#1A237E;whiteSpace=wrap;spacingLeft=3;" value="&lt;b&gt;v0.12 — Per-Agent Emitters&lt;/b&gt;&lt;br&gt;Optimized output per assistant.&lt;br&gt;CC: priority-prefixed files.&lt;br&gt;Cursor: merged .mdc rules.&lt;br&gt;&lt;br&gt;&lt;b&gt;v0.13 — Manifest&lt;/b&gt;&lt;br&gt;Structured build output &amp;rarr; Ember" vertex="1">
+          <mxGeometry height="90" width="185" x="787" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="e-parse-analyze" edge="1" parent="1" source="parse-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#3F51B5;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="analyze-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-analyze-optimize" edge="1" parent="1" source="analyze-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#3F51B5;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="optimize-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-optimize-emit" edge="1" parent="1" source="optimize-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#3F51B5;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="emit-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="output-label" parent="1" style="text;html=1;fontSize=11;fontStyle=1;align=left;fontColor=#E65100;whiteSpace=wrap;" value="OUTPUT" vertex="1">
+          <mxGeometry height="20" width="80" x="310" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="output-rt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;strokeWidth=2;fontColor=#2D7600;" value="ResolvedTarget[]&lt;br&gt;&lt;i style=&quot;font-size:9px;font-weight:normal&quot;&gt;Same type as today. Downstream&lt;br&gt;(buildPlan, applyMutations) unchanged.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="55" width="250" x="20" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="output-manifest" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=10;fontStyle=1;strokeWidth=2;fontColor=#E65100;" value="forge.manifest.json&lt;br&gt;&lt;i style=&quot;font-size:9px;font-weight:normal&quot;&gt;Structured build record. Skills, versions,&lt;br&gt;hashes, agents, tokens. Ember&amp;rsquo;s data source.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="55" width="250" x="310" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="e-emit-rt" edge="1" parent="1" source="emit-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" target="output-rt">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="370" />
+              <mxPoint x="145" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-emit-manifest" edge="1" parent="1" source="emit-box" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#E65100;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" target="output-manifest">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880.04" y="380" />
+              <mxPoint x="435" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="compat" parent="1" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;size=10;position=0.5;base=15;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=2;fontColor=#2D7600;rounded=1;" value="Zero breaking changes. Files without frontmatter = leaf nodes.&lt;br&gt;Sources without compile: true use the existing resolver." vertex="1">
+          <mxGeometry height="55" width="350" x="620" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="vite-label" parent="1" style="text;html=1;fontSize=11;fontStyle=3;align=center;fontColor=#1A237E;whiteSpace=wrap;" value="&amp;ldquo;Other tools install files. Forge compiles your AI environment.&amp;rdquo;" vertex="1">
+          <mxGeometry height="25" width="450" x="315" y="475" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
