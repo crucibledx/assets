@@ -20,13 +20,14 @@ Centralized visual assets for all Crucible products. Single source of truth — 
 
 ### Categories
 
-| Category    | Description                                                   |
-|-------------|---------------------------------------------------------------|
-| `forge/`    | Forge CLI — AI dev environment tool                           |
-| `platform/` | AI resource lifecycle platform (skills, specimens, resources) |
-| `ember/`    | Ember — AI observability and analytics                        |
-| `crucible/` | Crucible-wide assets (ecosystem, product phases, etc.)        |
-| `branding/` | Logos, wordmarks, icons, color references                     |
+| Category        | Description                                                                         |
+|-----------------|-------------------------------------------------------------------------------------|
+| `forge/`        | Forge CLI — AI dev environment tool                                                 |
+| `platform/`     | AI resource lifecycle platform (skills, specimens, resources)                       |
+| `ember/`        | Ember — AI observability and analytics                                              |
+| `crucible/`     | Crucible-wide assets (ecosystem, product phases, etc.)                              |
+| `factory-loop/` | Crucible delivery loop ([factory-loop](https://github.com/crucibledx/factory-loop)) |
+| `branding/`     | Logos, wordmarks, icons, color references                                           |
 
 ### Asset Types
 
@@ -140,7 +141,7 @@ scripts/optimize-svgs.sh --changed                              # only changed .
 
 **Convention over configuration** — just drop your source file in the right place:
 
-1. Pick the category (`forge/`, `platform/`, `ember/`, `crucible/`, `branding/`)
+1. Pick the category (`forge/`, `platform/`, `ember/`, `crucible/`, `factory-loop/`, `branding/`)
 2. Pick the asset type (`diagrams/`, `demos/`)
 3. Drop the source file (`.drawio`, `.tape`)
 4. Export/generate outputs (script or manual, see above)

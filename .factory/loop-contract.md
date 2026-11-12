@@ -3,8 +3,8 @@
 Read by the Crucible loop agents (`implement-spec`, `verifier`, `spec-writer`). Keep it accurate.
 
 - **Install:** `git lfs install` (GIF, PNG, JPG, WebP, and MP4 files are stored in Git LFS).
-- **Layout:** one folder per product (`forge/`, `ember/`, `crucible/`, `platform/`, `branding/`). Light variants are the
-  source; dark variants are generated.
+- **Layout:** one folder per product (`forge/`, `ember/`, `crucible/`, `factory-loop/`, `platform/`,
+  `branding/`). Light variants are the source; dark variants are generated.
 - **Checks** (before a PR is ready):
   - after changing a light SVG, run `scripts/generate-dark-svgs.sh` and commit the dark result;
   - after changing a `.tape`, run `scripts/generate-demos.sh` (needs `vhs`) and commit both light and dark GIFs;
