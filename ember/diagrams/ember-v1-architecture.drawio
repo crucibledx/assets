@@ -1,0 +1,124 @@
+<mxfile host="assetkit">
+  <diagram name="Ember v1 architecture" id="ember-v1-architecture">
+    <mxGraphModel background="#ffffff" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bg" value="" style="whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1260" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="Ember v1 architecture" style="text;html=1;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1220" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="One binary: a custom OpenTelemetry Collector. Each machine runs an agent; an optional gateway merges machines. Everything leaves as standard OTLP to your own backend." style="text;html=1;fontSize=12;fontStyle=2;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="20" y="55" width="1220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-h" value="Harnesses on this machine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="20" y="100" width="240" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="h-droid" value="Droid&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;genai spans · logs · metrics&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="140" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h-claude" value="Claude Code&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;metrics · events · beta traces&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="files" value="Session files&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;transcripts · settings · task&lt;br&gt;invocations; read locally,&lt;br&gt;never exported&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="frame" value="ember · agent mode (custom OpenTelemetry Collector)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#e65100;fontColor=#a34000;fontSize=14;fontStyle=1;strokeWidth=3;verticalAlign=top;spacingTop=6;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="320" y="100" width="620" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="r-otlp" value="otlp receiver&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;core component&lt;br&gt;127.0.0.1:4317 · 4318&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="340" y="140" width="170" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="p-ember" value="ember processor&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;harness match · re-parent ·&lt;br&gt;enrich · MCP split ·&lt;br&gt;privacy allowlist&lt;br&gt;(+ memory_limiter,&lt;br&gt;deltatocumulative, batch)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="550" y="140" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="exp" value="exporters&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;otlphttp / otlp,&lt;br&gt;one per signal&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="790" y="140" width="130" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="r-sess" value="ember_sessions&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;adapters (droid.go, claude.go)&lt;br&gt;→ deterministic tree&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="340" y="340" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="registry" value="Session registry&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;ember extension · /status&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="620" y="375" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-b" value="Your backend (any OTLP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="100" width="240" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="store" value="Traces · metrics · logs&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Tempo · Prometheus · Loki,&lt;br&gt;or any OTLP intake&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="140" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="dash" value="Dashboards&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Grafana: Agent tree ·&lt;br&gt;Overview · Tools and&lt;br&gt;MCP · Cost&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="300" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="other" value="Other machines&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;ember agent, same setup&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gw" value="ember gateway&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;optional · token + TLS · spawn&lt;br&gt;links across machines · privacy&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="760" y="490" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="lg0" value="Legend" style="text;html=1;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;fontColor=#37474f;" vertex="1" parent="1">
+          <mxGeometry x="40" y="600" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lg1" value="harness or stock Collector component" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="600" width="240" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lg2" value="built by Ember" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="600" width="140" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lg3" value="local files and dashboards" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="600" width="180" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lg4" value="your backend (external)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="600" width="150" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lg5" value="thin dotted line: optional or control path" style="text;html=1;fontSize=9;fontStyle=1;align=left;verticalAlign=middle;fontColor=#37474f;" vertex="1" parent="1">
+          <mxGeometry x="950" y="600" width="210" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lg5-line" value="" style="endArrow=classic;html=1;strokeWidth=1;dashed=1;strokeColor=#455a64;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="900" y="612" as="sourcePoint" /><mxPoint x="940" y="612" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-droid" value="native&lt;br&gt;OTLP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#6c8ebf;fontColor=#1a237e;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.1875;entryDx=0;entryDy=0;" edge="1" parent="1" source="h-droid" target="r-otlp">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-claude" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#6c8ebf;fontColor=#1a237e;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.8125;entryDx=0;entryDy=0;" edge="1" parent="1" source="h-claude" target="r-otlp">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-files" value="read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#bf9000;fontColor=#7f6000;flowAnimation=1;exitX=1;exitY=0.4375;exitDx=0;exitDy=0;entryX=0;entryY=0.4375;entryDx=0;entryDy=0;" edge="1" parent="1" source="files" target="r-sess">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-otlp-proc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#6c8ebf;fontColor=#1a237e;flowAnimation=1;exitX=1;exitY=0.3125;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="r-otlp" target="p-ember">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-sess-proc" value="Ember spans" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#e65100;fontColor=#a34000;flowAnimation=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="r-sess" target="p-ember">
+          <mxGeometry x="0.4" relative="1" as="geometry"><mxPoint as="offset" x="-36" /><Array as="points"><mxPoint x="600" y="360" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-sess-reg" value="runs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;fontSize=10;fontStyle=2;strokeColor=#e65100;fontColor=#a34000;dashed=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="r-sess" target="registry">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-reg-proc" value="lookup" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;fontSize=10;fontStyle=2;strokeColor=#e65100;fontColor=#a34000;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="registry" target="p-ember">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-proc-exp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#e65100;fontColor=#a34000;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p-ember" target="exp">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-exp-store" value="OTLP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#6c8ebf;fontColor=#1a237e;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="exp" target="store">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-store-dash" value="query" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;fontSize=10;fontStyle=2;strokeColor=#455a64;fontColor=#37474f;dashed=1;exitX=0.65;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="store" target="dash">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-exp-gw" value="or via gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;fontSize=10;fontStyle=2;strokeColor=#6c8ebf;fontColor=#1a237e;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.475;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="exp" target="gw">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-other-gw" value="OTLP + token" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#e65100;fontColor=#a34000;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="other" target="gw">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-gw-store" value="merged" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;fontStyle=2;strokeColor=#e65100;fontColor=#a34000;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="gw" target="store">
+          <mxGeometry x="-0.3" relative="1" as="geometry"><Array as="points"><mxPoint x="1040" y="530" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
