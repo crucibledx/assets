@@ -1,0 +1,155 @@
+<mxfile host="drawio">
+  <diagram name="Usage-limit recovery" id="usage-limit-recovery-v1">
+    <mxGraphModel background="#ffffff" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bg" value="" style="whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1280" height="910" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="Workstreams · usage-limit recovery" style="text;html=1;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="When the 5-hour usage window runs out, every tick calls usage-limit.sh first: it backs off until the reset, resumes each stopped agent once, and keeps Root quiet" style="text;html=1;fontSize=12;fontStyle=2;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="20" y="55" width="1240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="hit" value="Usage limit hit&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;5-hour window used up:&lt;br&gt;turns fail with&lt;br&gt;model_usage_exhausted&lt;br&gt;or paymentRequired; nothing&lt;br&gt;runs until the reset&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="175" width="190" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-tick" value="Every project tick (10 min) · usage-limit.sh first" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="230" y="110" width="1030" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="detect" value="1 · Detect&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;next tick that runs: check &amp;lt;ws&amp;gt;&lt;br&gt;reads the last turn outcome&lt;br&gt;of the orchestrator and each&lt;br&gt;agent; records the earliest&lt;br&gt;stop and the reset&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="175" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="backoff" value="2 · Back off&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;only a tick that runs before&lt;br&gt;the reset (check says active):&lt;br&gt;starts no agents, sends no&lt;br&gt;messages, writes its&lt;br&gt;heartbeat and stops&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="510" y="320" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="resume" value="3 · Resume&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;first tick after the reset:&lt;br&gt;check says resume and lists&lt;br&gt;each interrupted agent; the&lt;br&gt;orchestrator messages&lt;br&gt;each one once&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="770" y="175" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="clear" value="Clear&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;resumed &amp;lt;ws&amp;gt; &amp;lt;ids&amp;gt; marks the&lt;br&gt;stops handled; with none left,&lt;br&gt;the limit clears. Or check&lt;br&gt;clears it alone when no&lt;br&gt;agent needs a message&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="175" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="note-msg" value="&lt;b&gt;Sent once to each listed agent&lt;/b&gt;&lt;br&gt;&quot;Your last turn stopped at the usage limit. … Continue your last task from where it stopped. … Don't start over.&quot;&lt;br&gt;&lt;b&gt;Not listed&lt;/b&gt;: idle or finished agents, agents already restarted, the orchestrator (its next tick restarts it)" style="shape=note;size=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=4;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="320" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-state" value="Files read and written" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="20" y="490" width="715" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="transcripts" value="Session transcripts&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;last turn outcome and the&lt;br&gt;limit notice, per session&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="35" y="530" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="limitjson" value="&amp;lt;ws&amp;gt;-limit.json&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;reset: notice + 1 min, else&lt;br&gt;latest stop + 5 h · stops&lt;br&gt;already handled&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="530" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="statejson" value="&amp;lt;ws&amp;gt;-state.json&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;heartbeat: the orchestrator&lt;br&gt;session and its agents&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="510" y="530" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="note-err" value="If usage-limit.sh exits non-zero, the tick puts the error in needs_root (Root: in its notes) and carries on as if check said clear." style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;fontColor=#333333;fontSize=11;align=left;spacingLeft=10;spacingRight=10;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="770" y="540" width="470" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-root" value="Root tick · check root, then status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="20" y="670" width="1050" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="checkroot" value="check root&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Root's own session,&lt;br&gt;the same rule&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="35" y="715" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="status" value="status&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;reads every *-limit.json:&lt;br&gt;suppress_alerts, until&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="715" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="quiet" value="No stale-heartbeat alerts&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;while a limit is active and&lt;br&gt;for 30 min after the reset&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="550" y="715" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="recovery" value="One recovery reply&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;a workstream with an open&lt;br&gt;alert has a fresh heartbeat:&lt;br&gt;Root replies once in that&lt;br&gt;alert's thread&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="850" y="715" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e-hit-detect" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#b85450;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="hit" target="detect">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-detect-backoff" value="active" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;fontColor=#1a237e;fontStyle=2;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="detect" target="backoff">
+          <mxGeometry x="0.4" relative="1" as="geometry"><Array as="points"><mxPoint x="430" y="375" /></Array><mxPoint x="0" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-detect-resume" value="resume" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;fontColor=#1a237e;fontStyle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="detect" target="resume">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-backoff-resume" value="after reset" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#455a64;flowAnimation=1;fontColor=#37474f;fontStyle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="backoff" target="resume">
+          <mxGeometry x="0.4" relative="1" as="geometry"><Array as="points"><mxPoint x="790" y="375" /></Array><mxPoint x="35" y="0" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-resume-clear" value="resumed" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#9673a6;flowAnimation=1;fontColor=#7b1fa2;fontStyle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="resume" target="clear">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-clear-hit" value="limit again" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;fontColor=#a4332e;fontStyle=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="clear" target="hit">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1130" y="90" /><mxPoint x="115" y="90" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-resume-note" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#9673a6;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="resume" target="note-msg">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <object id="e-transcripts-detect" label="read" assetkit-disable="OFF_PALETTE" reason="dark-safe idea line: #d6b656 and #bf9000 fade in the generated dark variant, so the line uses the idea font colour">
+          <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#7f6000;fontColor=#7f6000;fontStyle=2;exitX=0.8;exitY=0;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="transcripts" target="detect">
+            <mxGeometry x="0.6" relative="1" as="geometry"><Array as="points"><mxPoint x="179" y="470" /><mxPoint x="290" y="470" /></Array></mxGeometry>
+          </mxCell>
+        </object>
+        <mxCell id="e-detect-limit" value="write" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#6c8ebf;fontColor=#1a237e;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="detect" target="limitjson">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-backoff-state" value="heartbeat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#455a64;fontColor=#37474f;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="backoff" target="statejson">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <object id="e-limit-status" label="read" assetkit-disable="OFF_PALETTE" reason="dark-safe idea line: #d6b656 and #bf9000 fade in the generated dark variant, so the line uses the idea font colour">
+          <mxCell style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#7f6000;fontColor=#7f6000;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="limitjson" target="status">
+            <mxGeometry x="-0.25" relative="1" as="geometry"></mxGeometry>
+          </mxCell>
+        </object>
+        <mxCell id="e-check-status" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="checkroot" target="status">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-status-quiet" value="suppress_alerts" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;fontColor=#1a237e;fontStyle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="status" target="quiet">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-quiet-recovery" value="fresh heartbeat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#455a64;flowAnimation=1;fontColor=#37474f;fontStyle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="quiet" target="recovery">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-t" value="Colours:" style="text;html=1;fontSize=10;fontStyle=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="20" y="860" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-limit" value="Usage limit" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="860" width="80" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-script" value="usage-limit.sh" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="860" width="95" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-wait" value="Waits · stays quiet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="275" y="860" width="115" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-orch" value="Message sent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="860" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-ok" value="Recovered" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="495" y="860" width="75" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-state" value="File · note" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="860" width="75" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-e-main" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="675" y="872" as="sourcePoint" /><mxPoint x="710" y="872" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-e-main-t" value="tick flow" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="715" y="860" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-e-sec" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="785" y="872" as="sourcePoint" /><mxPoint x="820" y="872" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-e-sec-t" value="reads · writes · message" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="825" y="860" width="140" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-e-fb" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="975" y="872" as="sourcePoint" /><mxPoint x="1010" y="872" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-e-fb-t" value="limit again" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1015" y="860" width="70" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
