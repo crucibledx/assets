@@ -1,0 +1,217 @@
+<mxfile host="drawio">
+  <diagram name="Slack bridge Worker flow" id="slack-bridge-worker-flow-v1">
+    <mxGraphModel background="#ffffff" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bg" value="" style="whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1300" height="890" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="Slack bridge · Worker flow" style="text;html=1;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1260" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Each Slack message is checked, filtered, deduped, routed and recorded before the 200; delivery to the workstream relay runs after it, within the hourly budget, with retries and a pending queue" style="text;html=1;fontSize=12;fontStyle=2;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="20" y="55" width="1260" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-slack" value="Slack" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="20" y="100" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="s-msg" value="Human message&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;top-level message or&lt;br&gt;thread reply&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="30" y="150" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-req" value="Request path · POST /slack/events" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="200" y="100" width="855" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="r-verify" value="Verify&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;256 KB cap, else 413 ·&lt;br&gt;signature and timestamp&lt;br&gt;within 300 s, else 401&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="215" y="145" width="145" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r-filter" value="Filter&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;bot · subtype ·&lt;br&gt;unmapped channel ·&lt;br&gt;external user: ignored&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="385" y="145" width="145" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r-dedupe" value="Dedupe&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;message record already&lt;br&gt;in KV: 200, stop&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="555" y="145" width="145" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r-route" value="Route&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;1 prefix or @mention&lt;br&gt;2 thread claim&lt;br&gt;3 channel map&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="725" y="145" width="145" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r-record" value="Record, then 200&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;message record; thread&lt;br&gt;map for a top-level&lt;br&gt;message (KV)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="895" y="145" width="145" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-api" value="Workstream API · Bearer BRIDGE_TOKEN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="20" y="290" width="575" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="ws-agents" value="Workstream agents&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Root, Forge, Ember and Other sessions&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="535" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="e-claim" value="POST /claim&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;hand a thread to a workstream&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="420" width="165" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-reserve" value="POST /reserve&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Root, before it delivers to a project&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="225" y="420" width="165" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ledger" value="GET /ledger&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;route and reply lines since a time&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="410" y="420" width="165" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-state" value="Shared state · used by the request path, delivery and API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=bottom;spacingBottom=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="20" y="560" width="575" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="kv-thread" value="Thread map (KV)&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;channel + thread → workstream,&lt;br&gt;30 days, last claim wins&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="600" width="165" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="gate" value="RelayGate&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Durable Object per workstream,&lt;br&gt;50 runs per UTC hour&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="225" y="600" width="165" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kv-msg" value="Message records (KV)&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;one per message; metadata&lt;br&gt;is the ledger line, 35 days&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="410" y="600" width="165" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-del" value="Delivery · waitUntil and cron" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="615" y="290" width="440" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="cron" value="Cron every 10 min&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;up to 8 entries, expired&lt;br&gt;first, then oldest first&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="630" y="330" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pending" value="Pending (KV)&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;gate refusal or outage, 429,&lt;br&gt;5xx, network error or&lt;br&gt;timeout; deadline 1 h&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="630" y="440" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="giveup" value="Give up (D2)&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;401, 404, 413, other 4xx,&lt;br&gt;or past the deadline&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="630" y="570" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="reserve" value="Reserve&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;RelayGate grant, valid&lt;br&gt;60 s; 2 s timeout,&lt;br&gt;fail closed&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="895" y="330" width="145" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="post" value="Relay POST&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;X-Webhook-Secret&lt;br&gt;5 s timeout, retries&lt;br&gt;after 2 s and 6 s&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="895" y="440" width="145" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ack" value="Ack (D1)&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;thread reply or&lt;br&gt;eyes reaction&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="895" y="570" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-ws" value="Workstreams" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1075" y="400" width="205" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="relay" value="Relay webhook&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Factory automation per&lt;br&gt;workstream; 2xx = accepted,&lt;br&gt;then it wakes the session&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="440" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="grp-reply" value="Slack · replies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#455a64;fontColor=#37474f;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="615" y="690" width="435" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="s-reply" value="Thread replies and alert&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;D1 ack · D2 retrying, hold and give-up notices&lt;br&gt;Root channel alert&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="630" y="725" width="400" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="e-msg-verify" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s-msg" target="r-verify">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-verify-filter" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="r-verify" target="r-filter">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-filter-dedupe" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="r-filter" target="r-dedupe">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-dedupe-route" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="r-dedupe" target="r-route">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-route-record" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="r-route" target="r-record">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-record-reserve" value="after the 200" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;fontColor=#1a237e;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r-record" target="reserve">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-reserve-post" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="reserve" target="post">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-post-relay" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="post" target="relay">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-post-ack" value="2xx" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#82b366;flowAnimation=1;fontColor=#2e7d32;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="post" target="ack">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-reserve-pending" value="refused" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;fontColor=#8b2e2b;fontStyle=2;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.9;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="reserve" target="pending">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="924" y="415" /><mxPoint x="783" y="415" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-post-pending" value="429 · 5xx&lt;br&gt;timeout" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;fontColor=#8b2e2b;fontStyle=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="post" target="pending">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-post-giveup" value="4xx" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;fontColor=#8b2e2b;fontStyle=2;exitX=0;exitY=0.9;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="post" target="giveup">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="848" y="521" /><mxPoint x="848" y="600" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-pending-cron" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#6c8ebf;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="pending" target="cron">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-cron-reserve" value="retry" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;fontColor=#8b2e2b;fontStyle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cron" target="reserve">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-pending-giveup" value="deadline" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;fontColor=#8b2e2b;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pending" target="giveup">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-ack-reply" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#6c8ebf;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.84375;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ack" target="s-reply">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-giveup-reply" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.2125;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="giveup" target="s-reply">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-agents-claim" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#9673a6;exitX=0.1542056074766355;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ws-agents" target="e-claim">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-agents-reserve" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#9673a6;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ws-agents" target="e-reserve">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-agents-ledger" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#9673a6;exitX=0.8457943925233645;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ws-agents" target="e-ledger">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-claim-thread" value="write" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#6c8ebf;fontColor=#1a237e;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="e-claim" target="kv-thread">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-reserve-gate" value="reserve" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#6c8ebf;fontColor=#1a237e;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="e-reserve" target="gate">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="e-msg-ledger" value="read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#6c8ebf;fontColor=#1a237e;fontStyle=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="kv-msg" target="e-ledger">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-t" value="Colours:" style="text;html=1;fontSize=10;fontStyle=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="20" y="840" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-user" value="Slack user · failure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="840" width="110" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-bridge" value="Bridge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="840" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-ws" value="Workstream" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="840" width="80" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-kv" value="State in KV" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="840" width="80" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-infra" value="Slack · Cloudflare" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="840" width="110" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-ok" value="Delivered" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;fontStyle=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="840" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-e-main" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeWidth=2;strokeColor=#6c8ebf;flowAnimation=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="660" y="852" as="sourcePoint" /><mxPoint x="695" y="852" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-t-main" value="message flow" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="700" y="840" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-e-fb" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#b85450;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="790" y="852" as="sourcePoint" /><mxPoint x="825" y="852" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-t-fb" value="hold · retry · give up" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="830" y="840" width="115" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-e-api" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="950" y="852" as="sourcePoint" /><mxPoint x="985" y="852" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-t-api" value="API call" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="990" y="840" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-e-state" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeWidth=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1055" y="852" as="sourcePoint" /><mxPoint x="1090" y="852" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="leg-t-state" value="state · cron · notice" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="840" width="185" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
