@@ -1,0 +1,127 @@
+<mxfile host="assetkit">
+  <diagram name="Forge architecture" id="forge-architecture">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bg" value="" style="whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1300" height="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="Forge architecture" style="text;html=1;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="700" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Shipped v0.7.0 DDD + sync, with a separate planned plugin-delivery boundary" style="text;html=1;fontSize=12;fontStyle=2;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="250" y="55" width="800" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ddd-frame" value="FORGE CLI v0.7.0 — TYPESCRIPT + BUN · DEPENDENCY DIRECTION" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=14;fontStyle=1;strokeWidth=3;verticalAlign=top;spacingTop=6;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="30" y="100" width="1240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="infrastructure" value="Infrastructure&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Filesystem · Git · configuration&lt;br&gt;CLI prompts · scheduling&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#455a64;fontColor=#37474f;fontSize=14;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="90" y="170" width="330" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="application" value="Application&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Command handlers&lt;br&gt;Orchestration&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=14;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="485" y="170" width="330" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="domain" value="Domain&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Pure types · sync logic · transforms&lt;br&gt;Schemas · no I/O&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#1a237e;fontSize=14;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="880" y="170" width="330" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e-infra-app" value="depends on" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#455a64;fontColor=#37474f;fontSize=10;fontStyle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="infrastructure" target="application">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-app-domain" value="depends on" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;fontStyle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="application" target="domain">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="sync-frame" value="CURRENT SYNC — SHIPPED v0.7.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=14;fontStyle=1;strokeWidth=3;verticalAlign=top;spacingTop=6;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="30" y="340" width="1240" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="git-source" value="Git source&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;SSH / HTTPS&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=12;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="420" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="local-source" value="Local source&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Directory&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=12;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="500" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fetch" value="Fetch sources&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Parallel acquisition&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="450" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="detect" value="Auto-detect layout&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Canonical · pre-structured&lt;br&gt;Hybrid&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="460" y="450" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="plan" value="Resolve + plan&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Targets · conflicts&lt;br&gt;Drift detection&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="670" y="450" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="commit" value="Dry-run or commit&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Fail closed&lt;br&gt;Transactional writes&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="890" y="450" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="targets" value="Coding harness&lt;br&gt;targets + sync report&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Harness files&lt;br&gt;State + backups&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#276400;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="450" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e-git-fetch" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#bf9000;fontColor=#333333;fontSize=10;flowAnimation=1;exitX=1;exitY=0.875;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="git-source" target="fetch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-local-fetch" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#bf9000;fontColor=#333333;fontSize=10;flowAnimation=1;exitX=1;exitY=0.2916667;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="local-source" target="fetch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-fetch-detect" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="fetch" target="detect">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-detect-plan" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="detect" target="plan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-plan-commit" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="plan" target="commit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-commit-targets" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="commit" target="targets">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="layout-note" value="LAYOUTS&lt;br&gt;Canonical: transform + distribute&lt;br&gt;Pre-structured: copy · hybrid: both" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=10;fontStyle=2;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="600" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e-layout-note" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="detect" target="layout-note">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="plan-note" value="PLAN&lt;br&gt;SHA-256 desired / state / filesystem&lt;br&gt;Creates · updates · deletes · drift" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=10;fontStyle=2;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="600" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e-plan-note" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="plan" target="plan-note">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="commit-note" value="WRITE SAFETY&lt;br&gt;Backups + compensating rollback&lt;br&gt;Explicit incomplete-recovery reporting" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=10;fontStyle=2;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="950" y="600" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e-commit-note" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="commit" target="commit-note">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-app-sync" value="orchestrates" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;fontStyle=2;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="application" target="fetch">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="650" y="315" /><mxPoint x="335" y="315" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="plugin-frame" value="PLANNED v0.8 PLUGIN DELIVERY — SEPARATE EXTENSION BOUNDARY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=13;fontStyle=1;strokeWidth=2;verticalAlign=top;spacingTop=5;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="30" y="740" width="1240" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="plugin-package" value="Agent Plugins 1.0&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Source package&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#333333;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="90" y="800" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="plugin-validate" value="Validate + resolve&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Package checks&lt;br&gt;Local / pinned Git&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="800" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="plugin-emit" value="Emit + lock&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Harness output&lt;br&gt;Hashes + variants&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="710" y="800" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="plugin-native" value="Native delivery&lt;br&gt;&lt;i style=&quot;font-size:10px;font-weight:normal&quot;&gt;Droid + Claude Code&lt;br&gt;plugin systems&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#1a237e;fontSize=13;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="800" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e-plugin-package" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#bf9000;fontColor=#333333;fontSize=10;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="plugin-package" target="plugin-validate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-plugin-validate" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="plugin-validate" target="plugin-emit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-plugin-emit" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#3f51b5;fontColor=#1a237e;fontSize=10;flowAnimation=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="plugin-emit" target="plugin-native">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="compiler-note" value="v0.9 compiler + guardian — approved design, planned not released" style="text;html=1;fontSize=12;fontStyle=2;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="350" y="950" width="600" height="35" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
