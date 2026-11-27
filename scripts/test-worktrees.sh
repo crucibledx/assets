@@ -10,7 +10,7 @@ FIXTURE="$TMP/.worktrees/x"
 CALLS="$TMP/calls"
 export CALLS
 mkdir -p "$FIXTURE/scripts" "$TMP/bin" "$CALLS"
-cp "$SRC"/*.sh "$FIXTURE/scripts/"
+cp "$SRC"/*.sh "$SRC"/*.mjs "$FIXTURE/scripts/"
 chmod +x "$FIXTURE/scripts"/*.sh
 
 # Keep the test independent of SVGO, draw.io, and VHS installations.
@@ -22,12 +22,17 @@ output=
 while [ "$#" -gt 0 ]; do
   case "$1" in
     -o) output=$2; shift 2 ;;
+    -) input=-; shift ;;
     *.svg) input=$1; shift ;;
     *) shift ;;
   esac
 done
 if [ "$output" = "-" ]; then
-  cat "$input"
+  if [ "$input" = "-" ]; then
+    cat
+  else
+    cat "$input"
+  fi
 elif [ "$input" != "$output" ]; then
   cp "$input" "$output"
 fi
@@ -124,7 +129,7 @@ printf '\nSleep 1s\n' >> platform/.cache/ignored.tape
 scripts/optimize-svgs.sh --changed > "$TMP/optimize-changed.out"
 grep -F 'optimized 1 SVG(s).' "$TMP/optimize-changed.out"
 test "$(wc -l < "$CALLS/bunx" | tr -d ' ')" = 1
-grep -F 'platform/diagrams/light/flow.svg' "$CALLS/bunx"
+grep -F '<!-- changed -->' platform/diagrams/light/flow.svg
 ! grep -E '/[.](github|cache)/' "$CALLS/bunx"
 
 scripts/export-diagrams.sh --changed > "$TMP/export-changed.out"

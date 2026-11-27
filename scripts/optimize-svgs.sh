@@ -14,8 +14,8 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SVGO_VERSION="4.1.0"
 SVGO_CONFIG="$REPO_ROOT/scripts/svgo.config.mjs"
+SVGO_WITH_WHITESPACE="$REPO_ROOT/scripts/svgo-with-whitespace.sh"
 
 # Parse arguments
 FILTER=""
@@ -88,11 +88,18 @@ while IFS= read -r file; do
 
   if [[ "$DRY_RUN" == true ]]; then
     # Run svgo to stdout, measure size without writing
-    after=$(bunx "svgo@$SVGO_VERSION" --config "$SVGO_CONFIG" "$file" -o - 2>/dev/null | wc -c | tr -d ' ')
+    after=$("$SVGO_WITH_WHITESPACE" "$SVGO_CONFIG" < "$file" | wc -c | tr -d ' ')
     ratio=$(echo "scale=0; ($before - $after) * 100 / $before" | bc 2>/dev/null || echo "?")
     echo "▸ $rel: $(human_size "$before") → $(human_size "$after") (-${ratio}%) [dry-run]"
   else
-    bunx "svgo@$SVGO_VERSION" --config "$SVGO_CONFIG" "$file" -o "$file" --quiet 2>/dev/null
+    optimized=$(mktemp "${TMPDIR:-/tmp}/crucible-svgo.XXXXXX")
+    if "$SVGO_WITH_WHITESPACE" "$SVGO_CONFIG" < "$file" > "$optimized"; then
+      chmod 644 "$optimized"
+      mv "$optimized" "$file"
+    else
+      rm -f "$optimized"
+      exit 1
+    fi
     after=$(wc -c < "$file" | tr -d ' ')
     ratio=$(echo "scale=0; ($before - $after) * 100 / $before" | bc 2>/dev/null || echo "?")
     echo "▸ $rel: $(human_size "$before") → $(human_size "$after") (-${ratio}%)"

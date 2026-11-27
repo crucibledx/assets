@@ -18,13 +18,18 @@ function withDeclarations(style, updates) {
 }
 
 function isBackgroundRect(element) {
-  return (
-    element?.type === 'element' &&
-    element.name === 'rect' &&
-    element.attributes.width === '100%' &&
-    element.attributes.height === '100%' &&
-    WHITE.test(element.attributes.fill?.trim() ?? '')
-  )
+  if (
+    element?.type !== 'element' ||
+    element.name !== 'rect' ||
+    element.attributes.width !== '100%' ||
+    element.attributes.height !== '100%'
+  ) {
+    return false
+  }
+
+  const inlineFill = declarations(element.attributes.style).get('fill')
+  const effectiveFill = inlineFill || element.attributes.fill?.trim() || ''
+  return WHITE.test(effectiveFill)
 }
 
 // Dark generation is an AST transform, not a text substitution: only assetkit's
@@ -46,16 +51,17 @@ export default {
               filter: 'invert(1) hue-rotate(180deg)',
             })
 
-            const defsIndex = node.children.findIndex((child) => child.type === 'element' && child.name === 'defs')
-            const background =
-              defsIndex >= 0
-                ? node.children.find((child, index) => index > defsIndex && child.type === 'element')
-                : node.children.find((child) => child.type === 'element')
-            if (!isBackgroundRect(background)) return
+            const first = node.children.find((child) => child.type === 'element')
+            let background = isBackgroundRect(first) ? first : undefined
+            if (!background && first?.type === 'element' && first.name === 'defs') {
+              const afterDefs = node.children.find(
+                (child, index) => index > node.children.indexOf(first) && child.type === 'element',
+              )
+              if (isBackgroundRect(afterDefs)) background = afterDefs
+            }
+            if (!background) return
 
             const inlineFill = declarations(background.attributes.style).get('fill')
-            if (inlineFill && !WHITE.test(inlineFill)) return
-
             background.attributes.fill = 'transparent'
             if (inlineFill) {
               background.attributes.style = withDeclarations(background.attributes.style, {fill: 'transparent'})

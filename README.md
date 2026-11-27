@@ -160,7 +160,7 @@ scripts/generate-dark-svgs.sh platform/diagrams/light/flow.svg  # single file
 
 ### SVG Optimization
 
-Use **SVGO 4.1.0** with `scripts/svgo.config.mjs`, matching assetkit's multipass configuration (`minifyStyles` disabled and `removeScripts` enabled). The recommended pipeline is **optimize light → generate dark → optimize all**; dark generation also accepts both `#ffffff` and `#fff`, so either optimization order produces the same result. Finish with:
+Use **SVGO 4.1.0** with `scripts/svgo.config.mjs`, matching assetkit's multipass configuration (`minifyStyles` disabled and `removeScripts` enabled). The shared wrapper preserves meaningful whitespace around inline HTML in `foreignObject` during both optimization and dark generation. The recommended pipeline is **optimize light → generate dark → optimize all**; dark generation also accepts hexadecimal, RGB, presentation-attribute, and inline-style white backgrounds, so either optimization order produces the same result. Finish with:
 
 ```bash
 scripts/optimize-svgs.sh                                        # all SVGs
@@ -170,7 +170,7 @@ scripts/optimize-svgs.sh --dry-run                              # preview saving
 scripts/optimize-svgs.sh --changed                              # only changed .svg files
 ```
 
-Run `scripts/test-svg-pipeline.sh` to verify repeat-pass idempotence and identical output from both dark-generation orders.
+Run `scripts/test-svg-pipeline.sh` to verify repeat-pass idempotence, inline HTML whitespace preservation, root-background scoping, and identical output from both dark-generation orders.
 
 ## Adding Assets
 

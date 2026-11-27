@@ -22,8 +22,8 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SVGO_VERSION="4.1.0"
 SVGO_DARK_CONFIG="$REPO_ROOT/scripts/svgo-dark.config.mjs"
+SVGO_WITH_WHITESPACE="$REPO_ROOT/scripts/svgo-with-whitespace.sh"
 
 FILTER=""
 [[ $# -gt 0 ]] && FILTER="$1"
@@ -56,7 +56,7 @@ generate_dark() {
 
   # The SVGO plugin changes only the root style and assetkit's root background
   # insertion point. Nested full-canvas artwork is never rewritten.
-  bunx "svgo@$SVGO_VERSION" --config "$SVGO_DARK_CONFIG" "$src" -o "$out" --quiet
+  "$SVGO_WITH_WHITESPACE" "$SVGO_DARK_CONFIG" < "$src" > "$out"
 
   local rel="${out#$REPO_ROOT/}"
   echo "▸ $rel"
