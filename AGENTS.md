@@ -19,6 +19,9 @@ Run `git lfs install` before you clone or commit; GIF, PNG, JPG, WebP and MP4 fi
 - Edit sources (`.drawio`, `.tape`) and light variants only. Produce dark SVGs and demo GIFs with the scripts in
   `scripts/`; never export or hand-edit a dark variant.
 - Commit the source and every output it produces in the same PR.
+- Run `python3 scripts/check-drawio-labels.py` after editing a `.drawio` file. Exports and visual checks miss a
+  double-escaped label (`&amp;lt;br&amp;gt;` renders as a literal `<br>`); this check fails on it. It lists files
+  with `git`, so it also works under `.worktrees/`.
 - Other repos link these files by raw GitHub URL. Search the org before you rename or move anything (the command is in
   the loop contract).
 - `export-diagrams.sh`, `generate-demos.sh` and `optimize-svgs.sh` skip every path that contains a dot-directory, so

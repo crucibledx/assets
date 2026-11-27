@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+"""Fail when a draw.io label shows escaped markup or entities as literal text.
+
+A label that is escaped twice, for example `&amp;lt;br&amp;gt;` in the file, renders as a literal `<br>` while
+exports and `assetkit check` still pass. This decodes each label the way draw.io does and reports:
+
+- HTML labels (`html=1` in the style): an escaped HTML tag such as `&lt;br&gt;`, or an escaped entity such as
+  `&amp;nbsp;`, left in the label's HTML. Placeholders that are not HTML tags (`&lt;ws&gt;`) are fine.
+- Plain-text labels: an HTML entity such as `&lt;` or `&amp;`, which plain text shows as typed.
+
+Only cell labels are checked (`value` on mxCell, `label` on object and UserObject), on plain and compressed pages.
+Tooltips and object properties are not.
+
+Usage:
+  python3 scripts/check-drawio-labels.py                      # every .drawio file in the repo
+  python3 scripts/check-drawio-labels.py forge                # .drawio files under forge/
+  python3 scripts/check-drawio-labels.py path/to/file.drawio  # one file (any extension)
+
+Without a file argument, files come from git (tracked plus new, not ignored), so it also works under .worktrees/.
+Exit status: 0 when every label is clean, 1 when one is not, 2 on a usage error or a file it cannot read.
+Needs only Python 3 and git.
+"""
+
+import base64
+import html.entities
+import re
+import subprocess
+import sys
+import urllib.parse
+import xml.etree.ElementTree as ET
+import zlib
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
+# HTML elements only: labels show placeholders such as `<ws>` or `<id>` as text on purpose.
+HTML_TAGS = (
+    "a|b|big|blockquote|br|caption|center|code|del|div|em|font|h[1-6]|hr|i|img|ins|li|mark|ol|p|pre|s|small|span"
+    "|strike|strong|sub|sup|table|tbody|td|th|thead|tr|u|ul"
+)
+# Attributes need a value, so prose such as `&lt;b or c&gt;` is not read as a tag.
+ATTRIBUTE = r"""\s+[\w:-]+\s*=\s*(?:&quot;.*?&quot;|"[^"]*"|'[^']*'|[^\s&"'>]+)"""
+ESCAPED_TAG = re.compile(rf"&lt;/?(?:{HTML_TAGS})(?:{ATTRIBUTE})*\s*/?&gt;", re.IGNORECASE)
+ENTITY = r"&(?P<name>[A-Za-z][A-Za-z0-9]*|#[0-9]+|#[xX][0-9A-Fa-f]+);"
+ESCAPED_ENTITY = re.compile(ENTITY.replace("&", "&amp;", 1))
+TEXT_ENTITY = re.compile(ENTITY)
+
+
+class UsageError(Exception):
+    pass
+
+
+def is_entity(match):
+    name = match.group("name")
+    return name.startswith("#") or f"{name};" in html.entities.html5
+
+
+def label_problems(label, html_label):
+    """Returns (message, match) pairs for one decoded label."""
+    if html_label:
+        found = [("escaped tag shows as text", m.group(0)) for m in ESCAPED_TAG.finditer(label)]
+        found += [("escaped entity shows as text", m.group(0)) for m in ESCAPED_ENTITY.finditer(label) if is_entity(m)]
+        return found
+    return [("entity in a plain-text label shows as text", m.group(0))
+            for m in TEXT_ENTITY.finditer(label) if is_entity(m)]
+
+
+def is_html(style):
+    return "html=1" in (style or "").split(";")
+
+
+def page_model(diagram):
+    """The page's mxGraphModel, decoding a compressed page."""
+    model = diagram.find("mxGraphModel")
+    if model is not None:
+        return model
+    data = (diagram.text or "").strip()
+    if not data:
+        return None
+    xml = urllib.parse.unquote(zlib.decompress(base64.b64decode(data), -15).decode("utf-8"))
+    return ET.fromstring(xml)
+
+
+def labelled_cells(model):
+    """Yields (cell id, label, style) for every cell with a label."""
+    for el in model.iter():
+        if el.tag == "mxCell" and el.get("value"):
+            yield el.get("id", "?"), el.get("value"), el.get("style")
+        elif el.tag in ("object", "UserObject") and el.get("label"):
+            cell = el.find("mxCell")
+            yield el.get("id", "?"), el.get("label"), cell.get("style") if cell is not None else None
+
+
+def check_file(path):
+    """Returns the report lines for one file."""
+    root = ET.parse(path).getroot()
+    diagrams = root.findall("diagram") if root.tag == "mxfile" else []
+    pages = [(d.get("name", "?"), page_model(d)) for d in diagrams] or [("?", root)]
+    lines = []
+    for page, model in pages:
+        if model is None:
+            continue
+        for cell_id, label, style in labelled_cells(model):
+            for message, text in label_problems(label, is_html(style)):
+                lines.append(f'{path}: page "{page}", cell {cell_id}: {message}: {text}')
+    return lines
+
+
+def repo_diagrams(scope):
+    """Tracked and new (not ignored) .drawio files under scope, a directory relative to the repo root."""
+    pathspec = f"{scope}/*.drawio" if scope else "*.drawio"
+    try:
+        out = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--",
+             pathspec],
+            check=True, capture_output=True, text=True,
+        ).stdout
+    except FileNotFoundError:
+        raise UsageError("git not found; pass .drawio files directly")
+    except subprocess.CalledProcessError as err:
+        raise UsageError(f"git ls-files failed: {err.stderr.strip()}; run inside a git checkout of assets, "
+                         "or pass .drawio files directly")
+    paths = sorted({REPO_ROOT / p for p in out.split("\0") if p})
+    return [p for p in paths if p.is_file()]
+
+
+def files_to_check(args):
+    if not args:
+        return repo_diagrams("")
+    files = []
+    for arg in args:
+        path = Path(arg)
+        if path.is_file():
+            files.append(path)
+        elif path.is_dir():
+            try:
+                scope = path.resolve().relative_to(REPO_ROOT).as_posix()
+            except ValueError:
+                raise UsageError(f"{arg}: not inside the assets repo ({REPO_ROOT})")
+            found = repo_diagrams("" if scope == "." else scope)
+            if not found:
+                print(f"{arg}: no .drawio files", file=sys.stderr)
+            files += found
+        else:
+            raise UsageError(f"{arg}: no such file or directory")
+    return files
+
+
+def main(args):
+    sys.stdout.reconfigure(errors="backslashreplace")
+    try:
+        files = files_to_check(args)
+    except UsageError as err:
+        print(f"check-drawio-labels: {err}", file=sys.stderr)
+        return 2
+    problems, unreadable = [], 0
+    for path in files:
+        try:
+            problems += check_file(path)
+        except (ET.ParseError, ValueError, zlib.error, OSError) as err:
+            print(f"{path}: cannot read: {err}", file=sys.stderr)
+            unreadable += 1
+    for line in problems:
+        print(line)
+    print(f"{len(files)} file(s) checked, {len(problems)} label problem(s)", file=sys.stderr)
+    if unreadable:
+        return 2
+    return 1 if problems else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

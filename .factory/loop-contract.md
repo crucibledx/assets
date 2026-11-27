@@ -6,6 +6,8 @@ Read by the Crucible loop agents (`implement-spec`, `verifier`, `spec-writer`). 
 - **Layout:** one folder per product (`forge/`, `ember/`, `crucible/`, `factory-loop/`, `platform/`,
   `branding/`). Light variants are the source; dark variants are generated.
 - **Checks** (before a PR is ready):
+  - `python3 scripts/check-drawio-labels.py` passes (no label with double-escaped markup or entities that render as
+    text); its tests: `python3 scripts/test-check-drawio-labels.py`;
   - after changing a light SVG, run `scripts/generate-dark-svgs.sh` and commit the dark result;
   - after changing a `.tape`, run `scripts/generate-demos.sh` (needs `vhs`) and commit both light and dark GIFs;
   - `scripts/optimize-svgs.sh` leaves no diff;

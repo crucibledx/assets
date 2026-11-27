@@ -1,0 +1,34 @@
+<mxfile host="Electron" pages="2">
+  <diagram name="Clean" id="clean">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="br" parent="1" style="whiteSpace=wrap;html=1;" value="Developer&lt;br&gt;&lt;span style=&amp;quot;font-weight:normal&amp;quot;&gt;uses AI&lt;/span&gt;" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="entities" parent="1" style="html=1;" value="Forge &amp;nbsp;&amp;#10004; shipped &amp;mdash; R&amp;amp;D" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="placeholder" parent="1" style="html=1;" value="ws:&lt;ws&gt; owns &lt;id&gt;" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="plain" parent="1" style="rounded=0;" value="Plain R&amp;D, a &lt; b" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="prose" parent="1" style="html=1;" value="send &amp;lt;a message&amp;gt; if i &amp;lt;b or c&amp;gt; d" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qa" parent="1" style="rounded=0;" value="Q&amp;A; notes" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <UserObject id="link" label="Docs&lt;br&gt;&lt;b&gt;link&lt;/b&gt;" link="https://example.com">
+          <mxCell parent="1" style="html=1;" vertex="1">
+            <mxGeometry width="160" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Compressed" id="compressed">jZFRDsIgDIZP0/cNjAcY6p48BEozlsBYOtTN08ukU5do4gPkb/n+0gJI5ceadG+PwaADuQepKISYlR8VOgeiaA3IHQhRpAXzfvgBlBnoNWEX//Tcv5g4NcTJYc5QuHQGZ0sJsrLRO5aZvGp3YVIF3xMOQ4LF1qWC1YmSamZ1dqg7diBFHD+u4+5qDB4jTQm5tSZaJpY5LLaN5S43nNNDjpuXdTVxEjz0Er6f+Hm2+oEH</diagram>
+</mxfile>

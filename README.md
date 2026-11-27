@@ -92,6 +92,17 @@ scripts/generate-demos.sh --changed                             # only changed .
 
 ### Diagrams
 
+**Before exporting — check the labels:**
+
+A label escaped twice in the `.drawio` file (`&amp;lt;br&amp;gt;`) renders as a literal `<br>`, and exports don't
+complain. The check fails on that and on entities that a label shows as text:
+
+```bash
+python3 scripts/check-drawio-labels.py                          # all diagrams
+python3 scripts/check-drawio-labels.py forge                    # forge category only
+python3 scripts/check-drawio-labels.py platform/diagrams/flow.drawio  # single file
+```
+
 **Step 1 — Export light SVGs from draw.io:**
 
 Use the script for batch export:

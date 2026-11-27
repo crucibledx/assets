@@ -1,0 +1,28 @@
+<mxfile host="Electron" pages="2">
+  <diagram name="Bad" id="bad">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="br" parent="1" style="whiteSpace=wrap;html=1;" value="Slack&amp;lt;br&amp;gt;bridge" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="entity" parent="1" style="html=1;" value="Forge&amp;amp;nbsp;CLI" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="plain" parent="1" style="rounded=0;" value="a &amp;lt; b" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="span" parent="1" style="html=1;" value="&amp;lt;span style=&amp;quot;color:red&amp;quot;&amp;gt;red&amp;lt;/span&amp;gt;" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <UserObject id="link" label="&amp;lt;b&amp;gt;Docs&amp;lt;/b&amp;gt;" link="https://example.com">
+          <mxCell parent="1" style="html=1;" vertex="1">
+            <mxGeometry width="160" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Compressed" id="compressed">jZFRDsIgDIZPw/sGxgMMdU8eAkMzlsAgHdPN08tGN12iiQ+Q/uX7SwtMSDfWqIK5eg2WiTMTEr2POXKjBGsZL1rNxIlxXqTF5v3yAygzEBRCF//0PL+YKNXHyULOoB86DbOlZKIy0VkKM3lXdiBSehcQ+j7B/KhcSIxNZasbbrpZtNLkBYwwflxMfdbgHUScEvJodTRErBMZaBtD/R4op/qsm826mz0FNP4q34+9nO3+4gU=</diagram>
+</mxfile>
