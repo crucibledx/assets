@@ -17,11 +17,22 @@
 # Light SVGs live in light/ directories, dark variants go to dark/:
 #   platform/diagrams/light/platform-flow.svg  →  platform/diagrams/dark/platform-flow.svg
 #
-# No dependencies beyond sed.
+# Requires: bunx (uses pinned SVGO 4.1.0 and scripts/svgo-dark.config.mjs)
 
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+SVGO_DARK_CONFIG="$REPO_ROOT/scripts/svgo-dark.config.mjs"
+SVGO_WITH_WHITESPACE="$REPO_ROOT/scripts/svgo-with-whitespace.sh"
+
+TEMP_FILE=""
+cleanup_temp() {
+  [[ -z "$TEMP_FILE" ]] || rm -f -- "$TEMP_FILE"
+}
+trap cleanup_temp EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 FILTER=""
 [[ $# -gt 0 ]] && FILTER="$1"
@@ -52,14 +63,16 @@ generate_dark() {
 
   mkdir -p "$dark_dir"
 
-  # 1. Replace background colors with transparent
-  # 2. Inject the invert filter into the root <svg> style
-  # 3. Swap color-scheme from light to dark
-  sed \
-    -e 's/background:#fff;background-color:#fff/background:transparent;background-color:transparent/g' \
-    -e 's/color-scheme:light/color-scheme:dark;filter:invert(1) hue-rotate(180deg)/g' \
-    -e 's/fill="#fff" stroke-width="0"/fill="transparent" stroke-width="0"/g' \
-    "$src" > "$out"
+  # The SVGO plugin changes only the root style and assetkit's root background
+  # insertion point. Nested full-canvas artwork is never rewritten.
+  TEMP_FILE=$(mktemp "$dark_dir/.$name.XXXXXX")
+  if "$SVGO_WITH_WHITESPACE" "$SVGO_DARK_CONFIG" < "$src" > "$TEMP_FILE"; then
+    chmod 644 "$TEMP_FILE"
+    mv "$TEMP_FILE" "$out"
+    TEMP_FILE=""
+  else
+    exit 1
+  fi
 
   local rel="${out#$REPO_ROOT/}"
   echo "▸ $rel"

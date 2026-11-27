@@ -9,11 +9,22 @@
 #   scripts/optimize-svgs.sh --dry-run                    # show savings without writing
 #   scripts/optimize-svgs.sh --changed                    # only changed since last commit
 #
-# Requires: svgo (available via bunx/npx, or install globally: npm i -g svgo)
+# Requires: bunx (uses pinned SVGO 4.1.0 and scripts/svgo.config.mjs)
 
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+SVGO_CONFIG="$REPO_ROOT/scripts/svgo.config.mjs"
+SVGO_WITH_WHITESPACE="$REPO_ROOT/scripts/svgo-with-whitespace.sh"
+
+TEMP_FILE=""
+cleanup_temp() {
+  [[ -z "$TEMP_FILE" ]] || rm -f -- "$TEMP_FILE"
+}
+trap cleanup_temp EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 # Parse arguments
 FILTER=""
@@ -86,11 +97,18 @@ while IFS= read -r file; do
 
   if [[ "$DRY_RUN" == true ]]; then
     # Run svgo to stdout, measure size without writing
-    after=$(bunx svgo "$file" -o - 2>/dev/null | wc -c | tr -d ' ')
+    after=$("$SVGO_WITH_WHITESPACE" "$SVGO_CONFIG" < "$file" | wc -c | tr -d ' ')
     ratio=$(echo "scale=0; ($before - $after) * 100 / $before" | bc 2>/dev/null || echo "?")
     echo "▸ $rel: $(human_size "$before") → $(human_size "$after") (-${ratio}%) [dry-run]"
   else
-    bunx svgo "$file" -o "$file" --quiet 2>/dev/null
+    TEMP_FILE=$(mktemp "$(dirname "$file")/.$(basename "$file").XXXXXX")
+    if "$SVGO_WITH_WHITESPACE" "$SVGO_CONFIG" < "$file" > "$TEMP_FILE"; then
+      chmod 644 "$TEMP_FILE"
+      mv "$TEMP_FILE" "$file"
+      TEMP_FILE=""
+    else
+      exit 1
+    fi
     after=$(wc -c < "$file" | tr -d ' ')
     ratio=$(echo "scale=0; ($before - $after) * 100 / $before" | bc 2>/dev/null || echo "?")
     echo "▸ $rel: $(human_size "$before") → $(human_size "$after") (-${ratio}%)"
