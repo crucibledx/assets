@@ -1,0 +1,6 @@
+{
+  "stack": "assets",
+  "checks": {
+    "test": "sh scripts/test-svg-pipeline.sh\nsh scripts/test-worktrees.sh"
+  }
+}
