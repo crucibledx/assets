@@ -142,7 +142,13 @@ Or export manually through draw.io desktop:
     - **Embed Fonts**: ❌ uncheck (smaller output size)
 4. Save to the `light/` folder (e.g., `platform/diagrams/light/flow.svg`)
 
-**Step 2 — Generate dark variants:**
+**Step 2 — Optimize light SVGs:**
+
+```bash
+scripts/optimize-svgs.sh --changed
+```
+
+**Step 3 — Generate dark variants:**
 
 Dark SVGs are generated programmatically from light SVGs by injecting `filter: invert(1) hue-rotate(180deg)` — the same transform used by the Crucible website CSS. Never export dark theme from draw.io (it looks ugly).
 
@@ -154,7 +160,7 @@ scripts/generate-dark-svgs.sh platform/diagrams/light/flow.svg  # single file
 
 ### SVG Optimization
 
-After exporting, **always optimize SVGs** — SVGO typically reduces size 5-10x:
+Use **SVGO 4.1.0** with `scripts/svgo.config.mjs`, matching assetkit's multipass configuration (`minifyStyles` disabled and `removeScripts` enabled). The recommended pipeline is **optimize light → generate dark → optimize all**; dark generation also accepts both `#ffffff` and `#fff`, so either optimization order produces the same result. Finish with:
 
 ```bash
 scripts/optimize-svgs.sh                                        # all SVGs
@@ -164,6 +170,8 @@ scripts/optimize-svgs.sh --dry-run                              # preview saving
 scripts/optimize-svgs.sh --changed                              # only changed .svg files
 ```
 
+Run `scripts/test-svg-pipeline.sh` to verify repeat-pass idempotence and identical output from both dark-generation orders.
+
 ## Adding Assets
 
 **Convention over configuration** — just drop your source file in the right place:
@@ -171,9 +179,11 @@ scripts/optimize-svgs.sh --changed                              # only changed .
 1. Pick the category (`forge/`, `platform/`, `ember/`, `crucible/`, `factory-loop/`, `branding/`)
 2. Pick the asset type (`diagrams/`, `demos/`)
 3. Drop the source file (`.drawio`, `.tape`)
-4. Export/generate outputs (script or manual, see above)
-5. Optimize SVGs: `scripts/optimize-svgs.sh --changed`
-6. Commit both source and outputs
+4. Export/generate light outputs (script or manual, see above)
+5. Optimize light SVGs
+6. Generate dark SVG variants
+7. Optimize all SVGs: `scripts/optimize-svgs.sh --changed`
+8. Commit both source and outputs
 
 ## Git LFS
 
@@ -183,7 +193,7 @@ Heavy binary outputs (`.gif`, `.png`, `.jpg`, `.mp4`) are tracked via Git LFS. T
 
 - [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases) — for diagram exports
 - [VHS](https://github.com/charmbracelet/vhs) — for demo GIF generation (`brew install charmbracelet/tap/vhs`)
-- [SVGO](https://github.com/svg/svgo) — for SVG optimization (`npm i -g svgo` or use via `bunx svgo`)
+- [SVGO](https://github.com/svg/svgo) 4.1.0 — for SVG optimization (used via `bunx svgo@4.1.0`; no global install needed)
 - [Git LFS](https://git-lfs.github.com/) — for large file storage (`brew install git-lfs`)
 
 ## License
