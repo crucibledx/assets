@@ -118,7 +118,7 @@ count=0
 while IFS= read -r tape; do
   for variant in "${VARIANTS[@]}"; do
     generate "$tape" "$variant"
-    ((count++))
+    count=$((count + 1))
   done
 done <<< "$tapes"
 

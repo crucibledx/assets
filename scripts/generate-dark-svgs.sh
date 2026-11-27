@@ -76,7 +76,7 @@ fi
 count=0
 while IFS= read -r file; do
   generate_dark "$file"
-  ((count++))
+  count=$((count + 1))
 done <<< "$svgs"
 
 echo ""

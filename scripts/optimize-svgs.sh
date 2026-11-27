@@ -98,7 +98,7 @@ while IFS= read -r file; do
 
   total_before=$((total_before + before))
   total_after=$((total_after + after))
-  ((count++))
+  count=$((count + 1))
 done <<< "$svgs"
 
 echo ""
