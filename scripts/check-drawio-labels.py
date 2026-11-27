@@ -5,8 +5,9 @@ A label that is escaped twice, for example `&amp;lt;br&amp;gt;` in the file, ren
 exports and `assetkit check` still pass. This decodes each label the way draw.io does and reports:
 
 - HTML labels (`html=1` in the style): an escaped HTML tag such as `&lt;br&gt;` (or `&#60;br&#62;`, `&#x3c;br&#x3e;`),
-  or an escaped entity such as `&amp;nbsp;`, left in the label's HTML. Placeholders that are not HTML element names
-  (`&lt;ws&gt;`) are fine; one that is (`<title>`) is flagged, so write it another way (`{title}`).
+  or an escaped entity such as `&amp;nbsp;`, left in the label's HTML. Tag names are the HTML elements MDN marks
+  Baseline widely available. Other names, such as placeholders (`&lt;ws&gt;`), are fine; a placeholder that is a
+  Baseline element name (`<title>`) is flagged, so write it another way (`{title}`).
 - Plain-text labels: an HTML entity such as `&lt;` or `&amp;`, which plain text shows as typed.
 
 Only cell labels are checked (`value` on mxCell, `label` on object and UserObject), on plain and compressed pages.
@@ -34,19 +35,16 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-# Every HTML element, current and obsolete. Other names are not tags: labels show placeholders such as `<ws>` or
-# `<id>` as text on purpose.
+# Every HTML element that MDN marks Baseline widely available (web-features 3.48.0, `html.elements.*`), and no others:
+# not experimental or limited-availability ones, and not deprecated ones without a Baseline status (such as `font`).
+# Other names are not tags: labels show placeholders such as `<ws>` or `<id>` as text on purpose.
 HTML_TAGS = (
-    # Current elements (MDN HTML elements reference).
     "a abbr address area article aside audio b base bdi bdo blockquote body br button canvas caption cite code col "
-    "colgroup data datalist dd del details dfn dialog div dl dt em embed fencedframe fieldset figcaption figure footer "
-    "form h1 h2 h3 h4 h5 h6 head header hgroup hr html i iframe img input ins kbd label legend li link main map mark "
-    "math menu meta meter nav noscript object ol optgroup option output p picture pre progress q rp rt ruby s samp "
-    "script search section select selectedcontent slot small source span strong style sub summary sup svg table "
-    "tbody td template textarea tfoot th thead time title tr track u ul var video wbr "
-    # Obsolete and deprecated elements, which browsers and draw.io's HTML labels still render.
-    "acronym applet basefont bgsound big blink center content dir element font frame frameset image isindex keygen "
-    "listing marquee menuitem multicol nextid nobr noembed noframes param plaintext rb rtc shadow spacer strike tt xmp"
+    "colgroup data dd del details dfn dialog div dl dt em embed fieldset figcaption figure footer form h1 h2 h3 h4 h5 "
+    "h6 head header hgroup hr html i iframe img input ins kbd label legend li link main map mark menu meta meter nav "
+    "noscript object ol optgroup option output p picture pre progress q rp rt ruby s samp script search section select "
+    "slot small source span strong style sub summary sup table tbody td template textarea tfoot th thead time title tr "
+    "track u ul var video wbr"
 ).split()
 # `<`, `>` and `"` written as a named or numeric (decimal or hex) character reference.
 LT = r"(?:&lt;|&#0*60;|&#[xX]0*3[cC];)"

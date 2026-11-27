@@ -52,27 +52,35 @@ expected = [
     f'{bad}: page "Bad", cell link: escaped tag shows as text: &lt;/b&gt;',
     f'{bad}: page "Compressed", cell z1: escaped tag shows as text: &lt;br&gt;',
 ]
-check("double-escaped labels fail with one line per problem (HTML, numeric escapes, any HTML element, "
+check("double-escaped labels fail with one line per problem (HTML, numeric escapes, Baseline elements, "
       "attributes, plain, UserObject, compressed)",
       code == 1 and out == expected)
 
-# Every element in MDN's HTML elements reference, current and obsolete, kept separately from the script's own list.
-MDN_ELEMENTS = """
+# The rule: tag names are exactly the HTML elements MDN marks Baseline widely available. Source: MDN's Baseline status,
+# from the web-features package (3.48.0), every `html.elements.<name>` compat key with `baseline: "high"`. Kept
+# separately from the script's own list; update both when MDN moves an element to Baseline widely available.
+BASELINE_ELEMENTS = """
 a abbr address area article aside audio b base bdi bdo blockquote body br button canvas caption cite code col colgroup
-data datalist dd del details dfn dialog div dl dt em embed fencedframe fieldset figcaption figure footer form h1 h2 h3
-h4 h5 h6 head header hgroup hr html i iframe img input ins kbd label legend li link main map mark math menu meta meter
-nav noscript object ol optgroup option output p picture pre progress q rp rt ruby s samp script search section select
-selectedcontent slot small source span strong style sub summary sup svg table tbody td template textarea tfoot th
-thead time title tr track u ul var video wbr acronym big center content dir font frame frameset image marquee menuitem
-nobr noembed noframes param plaintext rb rtc shadow strike tt xmp
+data dd del details dfn dialog div dl dt em embed fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header
+hgroup hr html i iframe img input ins kbd label legend li link main map mark menu meta meter nav noscript object ol
+optgroup option output p picture pre progress q rp rt ruby s samp script search section select slot small source span
+strong style sub summary sup table tbody td template textarea tfoot th thead time title tr track u ul var video wbr
 """.split()
+# Not Baseline widely available in that data: limited availability or experimental (datalist, fencedframe,
+# geolocation, selectedcontent) or deprecated without a Baseline status (font, center, strike, tt).
+NOT_BASELINE = "datalist fencedframe geolocation selectedcontent font center strike tt".split()
+sys.dont_write_bytecode = True
 spec = importlib.util.spec_from_file_location("check_drawio_labels", CHECK)
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
-missed = [name for name in MDN_ELEMENTS
+check("the tag list is exactly MDN's Baseline widely available HTML elements",
+      sorted(module.HTML_TAGS) == sorted(BASELINE_ELEMENTS))
+missed = [name for name in BASELINE_ELEMENTS
           if module.label_problems(f"x&lt;{name}&gt;y&lt;/{name}&gt;", True) != [
               ("escaped tag shows as text", f"&lt;{name}&gt;"), ("escaped tag shows as text", f"&lt;/{name}&gt;")]]
-check(f"every MDN HTML element is caught when escaped (missed: {missed})", missed == [])
+check(f"every Baseline HTML element is caught when escaped (missed: {missed})", missed == [])
+flagged = [name for name in NOT_BASELINE if module.label_problems(f"&lt;{name}&gt;", True)]
+check(f"names that are not Baseline widely available are not tags (flagged: {flagged})", flagged == [])
 placeholders = [p for p in ("ws", "id", "ids", "scope", "hex", "pid", "name", "harness")
                 if module.label_problems(f"&lt;{p}&gt;", True)]
 check(f"placeholders used in the diagrams are not tags (flagged: {placeholders})", placeholders == [])
