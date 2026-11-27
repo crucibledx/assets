@@ -37,13 +37,16 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 # Every HTML element, current and obsolete. Other names are not tags: labels show placeholders such as `<ws>` or
 # `<id>` as text on purpose.
 HTML_TAGS = (
-    "a abbr acronym address applet area article aside audio b base basefont bdi bdo big blink blockquote body br "
-    "button canvas caption center cite code col colgroup data datalist dd del details dfn dialog dir div dl dt em "
-    "embed fieldset figcaption figure font footer form frame frameset h1 h2 h3 h4 h5 h6 head header hgroup hr html i "
-    "iframe img input ins kbd label legend li link main map mark marquee math menu meta meter nav nobr noframes "
-    "noscript object ol optgroup option output p picture pre progress q rp rt ruby s samp script search section "
-    "select slot small source span strike strong style sub summary sup svg table tbody td template textarea tfoot th "
-    "thead time title tr track tt u ul var video wbr xmp"
+    # Current elements (MDN HTML elements reference).
+    "a abbr address area article aside audio b base bdi bdo blockquote body br button canvas caption cite code col "
+    "colgroup data datalist dd del details dfn dialog div dl dt em embed fencedframe fieldset figcaption figure footer "
+    "form h1 h2 h3 h4 h5 h6 head header hgroup hr html i iframe img input ins kbd label legend li link main map mark "
+    "math menu meta meter nav noscript object ol optgroup option output p picture pre progress q rp rt ruby s samp "
+    "script search section select selectedcontent slot small source span strong style sub summary sup svg table "
+    "tbody td template textarea tfoot th thead time title tr track u ul var video wbr "
+    # Obsolete and deprecated elements, which browsers and draw.io's HTML labels still render.
+    "acronym applet basefont bgsound big blink center content dir element font frame frameset image isindex keygen "
+    "listing marquee menuitem multicol nextid nobr noembed noframes param plaintext rb rtc shadow spacer strike tt xmp"
 ).split()
 # `<`, `>` and `"` written as a named or numeric (decimal or hex) character reference.
 LT = r"(?:&lt;|&#0*60;|&#[xX]0*3[cC];)"

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Tests for scripts/check-drawio-labels.py against the fixtures in scripts/fixtures/drawio-labels/."""
 
+import importlib.util
 import shutil
 import subprocess
 import sys
@@ -54,6 +55,27 @@ expected = [
 check("double-escaped labels fail with one line per problem (HTML, numeric escapes, any HTML element, "
       "attributes, plain, UserObject, compressed)",
       code == 1 and out == expected)
+
+# Every element in MDN's HTML elements reference, current and obsolete, kept separately from the script's own list.
+MDN_ELEMENTS = """
+a abbr address area article aside audio b base bdi bdo blockquote body br button canvas caption cite code col colgroup
+data datalist dd del details dfn dialog div dl dt em embed fencedframe fieldset figcaption figure footer form h1 h2 h3
+h4 h5 h6 head header hgroup hr html i iframe img input ins kbd label legend li link main map mark math menu meta meter
+nav noscript object ol optgroup option output p picture pre progress q rp rt ruby s samp script search section select
+selectedcontent slot small source span strong style sub summary sup svg table tbody td template textarea tfoot th
+thead time title tr track u ul var video wbr acronym big center content dir font frame frameset image marquee menuitem
+nobr noembed noframes param plaintext rb rtc shadow strike tt xmp
+""".split()
+spec = importlib.util.spec_from_file_location("check_drawio_labels", CHECK)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+missed = [name for name in MDN_ELEMENTS
+          if module.label_problems(f"x&lt;{name}&gt;y&lt;/{name}&gt;", True) != [
+              ("escaped tag shows as text", f"&lt;{name}&gt;"), ("escaped tag shows as text", f"&lt;/{name}&gt;")]]
+check(f"every MDN HTML element is caught when escaped (missed: {missed})", missed == [])
+placeholders = [p for p in ("ws", "id", "ids", "scope", "hex", "pid", "name", "harness")
+                if module.label_problems(f"&lt;{p}&gt;", True)]
+check(f"placeholders used in the diagrams are not tags (flagged: {placeholders})", placeholders == [])
 
 code, out, _ = run(FIXTURES / "clean.drawio.xml", bad)
 check("several files: any problem fails the run", code == 1 and out == expected)
