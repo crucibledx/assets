@@ -63,6 +63,7 @@ export PATH
 
 cd "$FIXTURE"
 git init -q
+git config user.email t@t && git config user.name t
 mkdir -p platform/diagrams/light platform/demos .github/light platform/.cache/light
 cat > platform/diagrams/flow.drawio <<'SVG'
 <mxfile><diagram name="Flow">flow</diagram></mxfile>

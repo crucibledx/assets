@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# check-lfs.sh against real git fixtures: a clean repo passes; an ordinary binary blob, with or without the
+# attribute, fails; a pointer without the lfs attribute fails. Blobs are committed through hash-object so a
+# machine with git-lfs installed does not clean the fixtures into pointers.
+set -euo pipefail
+SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TMP=$(mktemp -d /tmp/assets-check-lfs.XXXXXX)
+trap 'rm -rf "$TMP"' EXIT
+POINTER='version https://git-lfs.github.com/spec/v1
+oid sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+size 123'
+
+mkrepo() {
+  git init -q "$1"
+  git -C "$1" config user.email t@t && git -C "$1" config user.name t
+  mkdir -p "$1/scripts"
+  cp "$SRC/check-lfs.sh" "$1/scripts/"
+  printf '*.gif filter=lfs diff=lfs merge=lfs -text\n*.bin filter=lfs diff=lfs merge=lfs -text\n' >"$1/.gitattributes"
+}
+# Commit the given files as raw blobs, bypassing any clean filter.
+commit_raw() {
+  local repo=$1 f blob
+  shift
+  for f in "$@"; do
+    blob=$(git -C "$repo" hash-object -w --no-filters "$repo/$f")
+    git -C "$repo" update-index --add --cacheinfo "100644,$blob,$f"
+  done
+  git -C "$repo" add scripts/check-lfs.sh .gitattributes
+  git -C "$repo" commit -qm x
+}
+
+# Clean: a pointer with the attribute, plus ordinary text.
+mkrepo "$TMP/clean"
+printf '%s\n' "$POINTER" >"$TMP/clean/a.gif"
+echo text >"$TMP/clean/notes.md"
+commit_raw "$TMP/clean" a.gif notes.md
+bash "$TMP/clean/scripts/check-lfs.sh"
+
+# An ordinary binary blob at a tracked extension fails and is named.
+mkrepo "$TMP/blob"
+printf '%s\n' "$POINTER" >"$TMP/blob/a.gif"
+printf 'GIF89a\0\0binary' >"$TMP/blob/b.bin"
+commit_raw "$TMP/blob" a.gif b.bin
+if bash "$TMP/blob/scripts/check-lfs.sh" 2>"$TMP/blob.err"; then
+  echo "an ordinary blob passed" >&2; exit 1
+fi
+grep -q "b.bin" "$TMP/blob.err"
+
+# A binary at an extension the attributes do not track fails too (identified by content, not attribute).
+mkrepo "$TMP/noext"
+printf '%s\n' "$POINTER" >"$TMP/noext/a.gif"
+printf 'PNG\0\0binary' >"$TMP/noext/c.raw"
+commit_raw "$TMP/noext" a.gif c.raw
+if bash "$TMP/noext/scripts/check-lfs.sh" 2>"$TMP/noext.err"; then
+  echo "an untracked-extension blob passed" >&2; exit 1
+fi
+grep -q "c.raw" "$TMP/noext.err"
+
+# A binary that merely contains the pointer string is not a pointer and fails.
+mkrepo "$TMP/fake"
+printf '%s
+' "$POINTER" >"$TMP/fake/a.gif"
+printf 'version https://git-lfs.github.com/spec/v1 in a comment\0\0binary' >"$TMP/fake/d.bin"
+commit_raw "$TMP/fake" a.gif d.bin
+if bash "$TMP/fake/scripts/check-lfs.sh" 2>"$TMP/fake.err"; then
+  echo "a binary quoting the pointer string passed" >&2; exit 1
+fi
+grep -q "d.bin" "$TMP/fake.err"
+
+# A blob with a valid pointer header and an extra binary line is not a pointer and fails.
+mkrepo "$TMP/malformed"
+printf '%s
+' "$POINTER" >"$TMP/malformed/a.gif"
+{ printf '%s
+' "$POINTER"; printf 'payload\0\0binary'; } >"$TMP/malformed/e.bin"
+commit_raw "$TMP/malformed" a.gif e.bin
+if bash "$TMP/malformed/scripts/check-lfs.sh" 2>"$TMP/malformed.err"; then
+  echo "a malformed pointer passed" >&2; exit 1
+fi
+grep -q "e.bin" "$TMP/malformed.err"
+
+# A valid header with a NUL payload on an extension line is not a pointer and fails.
+mkrepo "$TMP/ext"
+printf '%s
+' "$POINTER" >"$TMP/ext/a.gif"
+{ printf '%s
+' "$POINTER"; printf 'ext-0-foo \0payload'; } >"$TMP/ext/f.bin"
+commit_raw "$TMP/ext" a.gif f.bin
+if bash "$TMP/ext/scripts/check-lfs.sh" 2>"$TMP/ext.err"; then
+  echo "a malformed extension line passed" >&2; exit 1
+fi
+grep -q "f.bin" "$TMP/ext.err"
+
+# A pointer whose extension lost the attribute fails.
+mkrepo "$TMP/noattr"
+printf '*.bin filter=lfs diff=lfs merge=lfs -text\n' >"$TMP/noattr/.gitattributes"
+printf '%s\n' "$POINTER" >"$TMP/noattr/a.gif"
+commit_raw "$TMP/noattr" a.gif
+if bash "$TMP/noattr/scripts/check-lfs.sh" 2>"$TMP/noattr.err"; then
+  echo "an attribute-less pointer passed" >&2; exit 1
+fi
+grep -q "a.gif" "$TMP/noattr.err"
+
+# Non-ASCII and otherwise quotable names: a valid pointer passes, an ordinary blob fails and is named.
+mkrepo "$TMP/utf8"
+mkdir -p "$TMP/utf8/diagrams"
+printf '%s
+' "$POINTER" >"$TMP/utf8/diagrams/café.gif"
+commit_raw "$TMP/utf8" "diagrams/café.gif"
+bash "$TMP/utf8/scripts/check-lfs.sh"
+
+mkrepo "$TMP/utf8bad"
+printf '%s
+' "$POINTER" >"$TMP/utf8bad/a.gif"
+printf 'GIF89a\0\0binary' >"$TMP/utf8bad/café.bin"
+commit_raw "$TMP/utf8bad" a.gif "café.bin"
+if bash "$TMP/utf8bad/scripts/check-lfs.sh" 2>"$TMP/utf8bad.err"; then
+  echo "an ordinary blob at a non-ASCII name passed" >&2; exit 1
+fi
+grep -q "café.bin" "$TMP/utf8bad.err"
+
+echo "PASS: clean repos pass; ordinary, quoting, malformed and bad-extension blobs and attribute-less pointers fail"
