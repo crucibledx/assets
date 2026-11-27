@@ -79,6 +79,18 @@ if bash "$TMP/malformed/scripts/check-lfs.sh" 2>"$TMP/malformed.err"; then
 fi
 grep -q "e.bin" "$TMP/malformed.err"
 
+# A valid header with a NUL payload on an extension line is not a pointer and fails.
+mkrepo "$TMP/ext"
+printf '%s
+' "$POINTER" >"$TMP/ext/a.gif"
+{ printf '%s
+' "$POINTER"; printf 'ext-0-foo \0payload'; } >"$TMP/ext/f.bin"
+commit_raw "$TMP/ext" a.gif f.bin
+if bash "$TMP/ext/scripts/check-lfs.sh" 2>"$TMP/ext.err"; then
+  echo "a malformed extension line passed" >&2; exit 1
+fi
+grep -q "f.bin" "$TMP/ext.err"
+
 # A pointer whose extension lost the attribute fails.
 mkrepo "$TMP/noattr"
 printf '*.bin filter=lfs diff=lfs merge=lfs -text\n' >"$TMP/noattr/.gitattributes"
@@ -89,4 +101,4 @@ if bash "$TMP/noattr/scripts/check-lfs.sh" 2>"$TMP/noattr.err"; then
 fi
 grep -q "a.gif" "$TMP/noattr.err"
 
-echo "PASS: clean repos pass; ordinary, quoting and malformed blobs and attribute-less pointers fail, named"
+echo "PASS: clean repos pass; ordinary, quoting, malformed and bad-extension blobs and attribute-less pointers fail"

@@ -10,20 +10,10 @@ rc=0
 allfiles=$(git ls-tree -r --name-only HEAD)
 withattr=$(printf '%s\n' "$allfiles" | git check-attr --stdin filter | sed -n 's/: filter: lfs$//p')
 
-# A committed pointer, validated by format: small text blob whose first line is the spec URL, with oid and size
-# lines. A blob that merely contains the string is not a pointer.
+# A committed pointer, validated by git-lfs's own parser: the whole blob must parse.
 is_pointer() {
-  local blob
-  blob=$(git rev-parse --verify "HEAD:$1" 2>/dev/null) || return 1
-  [ "$(git cat-file -s "$blob")" -le 1024 ] || return 1
-  git cat-file blob "$blob" | awk '
-    NR == 1 { if ($0 != "version https://git-lfs.github.com/spec/v1") bad = 1; next }
-    NR > 12 { bad = 1; next }
-    /^oid sha256:[0-9a-f]+$/ && length($0) == 75 { o = 1; next }
-    /^size [0-9]+$/ { s = 1; next }
-    /^ext-[0-9]+-[a-z0-9-]+ / { next }
-    { bad = 1 }
-    END { exit (bad || !o || !s) }'
+  git cat-file blob "$(git rev-parse --verify "HEAD:$1" 2>/dev/null)" 2>/dev/null \
+    | git lfs pointer --check --stdin >/dev/null 2>&1
 }
 candidates=$(git grep -l 'git-lfs.github.com/spec' HEAD -- . | sed 's/^HEAD://' || true)
 pointers=""
