@@ -9,7 +9,26 @@ rc=0
 
 allfiles=$(git ls-tree -r --name-only HEAD)
 withattr=$(printf '%s\n' "$allfiles" | git check-attr --stdin filter | sed -n 's/: filter: lfs$//p')
-pointers=$(git grep -l 'version https://git-lfs.github.com/spec' HEAD -- . | sed 's/^HEAD://' || true)
+
+# A committed pointer, validated by format: small text blob whose first line is the spec URL, with oid and size
+# lines. A blob that merely contains the string is not a pointer.
+is_pointer() {
+  local blob
+  blob=$(git rev-parse --verify "HEAD:$1" 2>/dev/null) || return 1
+  [ "$(git cat-file -s "$blob")" -le 1024 ] || return 1
+  git cat-file blob "$blob" | awk '
+    NR == 1 && $0 != "version https://git-lfs.github.com/spec/v1" { bad = 1 }
+    /^oid sha256:[0-9a-f]+$/ && length($0) == 75 { o = 1 }
+    /^size [0-9]+$/ { s = 1 }
+    END { exit (bad || !o || !s) }'
+}
+candidates=$(git grep -l 'git-lfs.github.com/spec' HEAD -- . | sed 's/^HEAD://' || true)
+pointers=""
+while IFS= read -r f; do
+  [ -n "$f" ] || continue
+  if is_pointer "$f"; then pointers="${pointers:+$pointers
+}$f"; fi
+done <<< "$candidates"
 
 # Should be pointers but are not: lfs-attribute files (committed without git-lfs; a small text blob slips past
 # the binary check) plus any committed binary blob, attribute or not (git's own binary heuristic; pointers are

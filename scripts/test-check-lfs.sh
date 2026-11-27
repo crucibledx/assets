@@ -56,6 +56,17 @@ if bash "$TMP/noext/scripts/check-lfs.sh" 2>"$TMP/noext.err"; then
 fi
 grep -q "c.raw" "$TMP/noext.err"
 
+# A binary that merely contains the pointer string is not a pointer and fails.
+mkrepo "$TMP/fake"
+printf '%s
+' "$POINTER" >"$TMP/fake/a.gif"
+printf 'version https://git-lfs.github.com/spec/v1 in a comment\0\0binary' >"$TMP/fake/d.bin"
+commit_raw "$TMP/fake" a.gif d.bin
+if bash "$TMP/fake/scripts/check-lfs.sh" 2>"$TMP/fake.err"; then
+  echo "a binary quoting the pointer string passed" >&2; exit 1
+fi
+grep -q "d.bin" "$TMP/fake.err"
+
 # A pointer whose extension lost the attribute fails.
 mkrepo "$TMP/noattr"
 printf '*.bin filter=lfs diff=lfs merge=lfs -text\n' >"$TMP/noattr/.gitattributes"
@@ -66,4 +77,4 @@ if bash "$TMP/noattr/scripts/check-lfs.sh" 2>"$TMP/noattr.err"; then
 fi
 grep -q "a.gif" "$TMP/noattr.err"
 
-echo "PASS: clean repos pass; ordinary blobs (tracked or not) and attribute-less pointers fail, named"
+echo "PASS: clean repos pass; ordinary blobs, string-quoting binaries and attribute-less pointers fail, named"
