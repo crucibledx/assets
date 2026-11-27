@@ -67,6 +67,18 @@ if bash "$TMP/fake/scripts/check-lfs.sh" 2>"$TMP/fake.err"; then
 fi
 grep -q "d.bin" "$TMP/fake.err"
 
+# A blob with a valid pointer header and an extra binary line is not a pointer and fails.
+mkrepo "$TMP/malformed"
+printf '%s
+' "$POINTER" >"$TMP/malformed/a.gif"
+{ printf '%s
+' "$POINTER"; printf 'payload\0\0binary'; } >"$TMP/malformed/e.bin"
+commit_raw "$TMP/malformed" a.gif e.bin
+if bash "$TMP/malformed/scripts/check-lfs.sh" 2>"$TMP/malformed.err"; then
+  echo "a malformed pointer passed" >&2; exit 1
+fi
+grep -q "e.bin" "$TMP/malformed.err"
+
 # A pointer whose extension lost the attribute fails.
 mkrepo "$TMP/noattr"
 printf '*.bin filter=lfs diff=lfs merge=lfs -text\n' >"$TMP/noattr/.gitattributes"
@@ -77,4 +89,4 @@ if bash "$TMP/noattr/scripts/check-lfs.sh" 2>"$TMP/noattr.err"; then
 fi
 grep -q "a.gif" "$TMP/noattr.err"
 
-echo "PASS: clean repos pass; ordinary blobs, string-quoting binaries and attribute-less pointers fail, named"
+echo "PASS: clean repos pass; ordinary, quoting and malformed blobs and attribute-less pointers fail, named"
