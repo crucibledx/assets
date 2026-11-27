@@ -1,6 +1,6 @@
 {
   "stack": "assets",
   "checks": {
-    "test": "sh scripts/test-svg-pipeline.sh\nsh scripts/test-worktrees.sh"
+    "test": "bash scripts/test-svg-pipeline.sh\nbash scripts/test-worktrees.sh\nbash scripts/test-check-lfs.sh"
   }
 }
