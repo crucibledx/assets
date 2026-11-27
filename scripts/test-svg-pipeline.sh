@@ -95,4 +95,42 @@ for variant in optimized-first generated-first; do
   grep -Eq '</defs><rect[^>]*fill="transparent"' "$TMP/after-defs-dark-$variant.svg"
 done
 
-printf 'PASS: SVGO 4.1.0 is idempotent; both dark-generation orders preserve nested artwork and match byte-for-byte\n'
+printf '<svg><rect></svg>\n' > "$TMP/light/broken.svg"
+printf 'previous dark\n' > "$TMP/dark/broken.svg"
+cp "$TMP/dark/broken.svg" "$TMP/broken-dark-before.svg"
+if "$REPO_ROOT/scripts/generate-dark-svgs.sh" "$REL/light/broken.svg" >/dev/null 2>"$TMP/broken-error.log"; then
+  echo 'Malformed light SVG unexpectedly succeeded' >&2
+  exit 1
+fi
+cmp "$TMP/broken-dark-before.svg" "$TMP/dark/broken.svg"
+test -z "$(find "$TMP/dark" -name '.broken.svg.*' -print)"
+grep -Eq 'Error|error' "$TMP/broken-error.log"
+
+for collision in literal hex decimal; do
+  case "$collision" in
+    literal) value=$(printf '\363\260\200\200') ;;
+    hex) value='&#xF0000;' ;;
+    decimal) value='&#983040;' ;;
+  esac
+  printf '<svg xmlns="http://www.w3.org/2000/svg"><text>%s</text></svg>\n' "$value" > "$TMP/light/collision-$collision.svg"
+  printf 'previous dark\n' > "$TMP/dark/collision-$collision.svg"
+  cp "$TMP/light/collision-$collision.svg" "$TMP/collision-$collision-light-before.svg"
+  cp "$TMP/dark/collision-$collision.svg" "$TMP/collision-$collision-dark-before.svg"
+
+  if "$REPO_ROOT/scripts/optimize-svgs.sh" "$REL/light/collision-$collision.svg" >/dev/null 2>"$TMP/collision-$collision-error.log"; then
+    echo "Placeholder collision unexpectedly optimized: $collision" >&2
+    exit 1
+  fi
+  cmp "$TMP/collision-$collision-light-before.svg" "$TMP/light/collision-$collision.svg"
+
+  if "$REPO_ROOT/scripts/generate-dark-svgs.sh" "$REL/light/collision-$collision.svg" >/dev/null 2>>"$TMP/collision-$collision-error.log"; then
+    echo "Placeholder collision unexpectedly generated dark SVG: $collision" >&2
+    exit 1
+  fi
+  cmp "$TMP/collision-$collision-dark-before.svg" "$TMP/dark/collision-$collision.svg"
+  test -z "$(find "$TMP/light" -name ".collision-$collision.svg.*" -print)"
+  test -z "$(find "$TMP/dark" -name ".collision-$collision.svg.*" -print)"
+  grep -Fq 'whitespace placeholder' "$TMP/collision-$collision-error.log"
+done
+
+printf 'PASS: both orders match; nested artwork and inline whitespace survive; failures preserve existing outputs\n'

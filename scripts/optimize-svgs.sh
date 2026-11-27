@@ -17,6 +17,15 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SVGO_CONFIG="$REPO_ROOT/scripts/svgo.config.mjs"
 SVGO_WITH_WHITESPACE="$REPO_ROOT/scripts/svgo-with-whitespace.sh"
 
+TEMP_FILE=""
+cleanup_temp() {
+  [[ -z "$TEMP_FILE" ]] || rm -f -- "$TEMP_FILE"
+}
+trap cleanup_temp EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
 # Parse arguments
 FILTER=""
 DRY_RUN=false
@@ -92,12 +101,12 @@ while IFS= read -r file; do
     ratio=$(echo "scale=0; ($before - $after) * 100 / $before" | bc 2>/dev/null || echo "?")
     echo "▸ $rel: $(human_size "$before") → $(human_size "$after") (-${ratio}%) [dry-run]"
   else
-    optimized=$(mktemp "${TMPDIR:-/tmp}/crucible-svgo.XXXXXX")
-    if "$SVGO_WITH_WHITESPACE" "$SVGO_CONFIG" < "$file" > "$optimized"; then
-      chmod 644 "$optimized"
-      mv "$optimized" "$file"
+    TEMP_FILE=$(mktemp "$(dirname "$file")/.$(basename "$file").XXXXXX")
+    if "$SVGO_WITH_WHITESPACE" "$SVGO_CONFIG" < "$file" > "$TEMP_FILE"; then
+      chmod 644 "$TEMP_FILE"
+      mv "$TEMP_FILE" "$file"
+      TEMP_FILE=""
     else
-      rm -f "$optimized"
       exit 1
     fi
     after=$(wc -c < "$file" | tr -d ' ')

@@ -25,6 +25,15 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SVGO_DARK_CONFIG="$REPO_ROOT/scripts/svgo-dark.config.mjs"
 SVGO_WITH_WHITESPACE="$REPO_ROOT/scripts/svgo-with-whitespace.sh"
 
+TEMP_FILE=""
+cleanup_temp() {
+  [[ -z "$TEMP_FILE" ]] || rm -f -- "$TEMP_FILE"
+}
+trap cleanup_temp EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
 FILTER=""
 [[ $# -gt 0 ]] && FILTER="$1"
 
@@ -56,7 +65,14 @@ generate_dark() {
 
   # The SVGO plugin changes only the root style and assetkit's root background
   # insertion point. Nested full-canvas artwork is never rewritten.
-  "$SVGO_WITH_WHITESPACE" "$SVGO_DARK_CONFIG" < "$src" > "$out"
+  TEMP_FILE=$(mktemp "$dark_dir/.$name.XXXXXX")
+  if "$SVGO_WITH_WHITESPACE" "$SVGO_DARK_CONFIG" < "$src" > "$TEMP_FILE"; then
+    chmod 644 "$TEMP_FILE"
+    mv "$TEMP_FILE" "$out"
+    TEMP_FILE=""
+  else
+    exit 1
+  fi
 
   local rel="${out#$REPO_ROOT/}"
   echo "▸ $rel"
