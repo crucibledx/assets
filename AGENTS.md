@@ -8,9 +8,13 @@ How to work in this repo and where to find things. The linked documents are cano
 | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | Layout, categories, referencing, export steps, tools | [`README.md`](README.md)                                                                                        |
 | PR checks, commit style, consumers, release          | [`.factory/loop-contract.md`](.factory/loop-contract.md)                                                        |
-| Org context, delivery loop, approval boundaries      | `crucibledx/hq` `AGENTS.md`                                                                                     |
+| Org context, delivery loop, approval boundaries      | `crucibledx/hq` `AGENTS.md` (private, see below)                                                                |
 | Org engineering standards                            | `engineering-standards` skill (`crucibledx/factory-loop` `plugins/crucible-loop/skills/engineering-standards/`) |
 | Specs                                                | [`specs/`](specs/)                                                                                              |
+
+`crucibledx/hq` is private: agents with a local clone read its `AGENTS.md`; the hosted reviewer can't. Since
+factory-loop#57 the reviewer gets the org rules in its prompt from `crucibledx/factory-loop`
+`plugins/crucible-loop/skills/engineering-standards/org-rules.md`, so its 404 fetching hq is expected, not a problem.
 
 ## How to work
 
