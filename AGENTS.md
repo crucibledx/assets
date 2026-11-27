@@ -21,9 +21,8 @@ Run `git lfs install` before you clone or commit; GIF, PNG, JPG, WebP and MP4 fi
 - Commit the source and every output it produces in the same PR.
 - Other repos link these files by raw GitHub URL. Search the org before you rename or move anything (the command is in
   the loop contract).
-- `export-diagrams.sh`, `generate-demos.sh` and `optimize-svgs.sh` skip every path that contains a dot-directory, so
-  they find nothing in a checkout under `.worktrees/` or any other hidden directory. Run them from a checkout whose
-  path has no dot-directory.
+- Generation scripts work from the main clone or any Git worktree, including checkouts under `.worktrees/` or another
+  hidden parent directory. They skip hidden directories inside the checkout, such as `.git/` and `.github/`.
 - A change to the factory-loop delivery diagram pairs with a `crucibledx/factory-loop` PR; link the two PRs.
 
 ## Boundaries
