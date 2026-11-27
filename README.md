@@ -66,6 +66,31 @@ For immutable references, use a tag:
 ![diagram](https://github.com/crucibledx/assets/raw/v3/platform/diagrams/light/platform-flow.svg)
 ```
 
+### Linking a diagram from an unmerged assets PR
+
+A `main` URL returns 404 until the assets PR that adds the file merges, so a docs PR in another repo that links it
+fails its link check. Until then, pin the URL to the assets PR's head commit, using the full 40-character SHA:
+
+```markdown
+![diagram](https://github.com/crucibledx/assets/raw/<sha>/platform/diagrams/light/platform-flow.svg)
+```
+
+Get the SHA with `gh pr view <n> --repo crucibledx/assets --json headRefOid -q .headRefOid`. If the assets PR gets
+new commits, update the SHA, or the other repo shows the older version.
+
+| Assets PR | Link with | Why |
+|-----------|-----------|-----|
+| Open | `raw/<sha>/...` | `main` returns 404 until it merges |
+| Merged | `raw/main/...` | Follows later fixes to the diagram |
+| Merged, and the page must not change | `raw/<sha>/...` or `raw/<tag>/...` | Pinned to that version |
+
+A pinned SHA keeps working after the assets PR merges and its branch is deleted, because GitHub keeps the PR's
+commits. It never picks up later fixes, though, so switch it to `main` in a follow-up once the assets PR merges,
+unless that page should stay pinned.
+
+Use the `github.com/crucibledx/assets/raw/...` form, not `raw.githubusercontent.com`, for both. For files in Git LFS
+(GIF, PNG, JPG, WebP, MP4), `raw.githubusercontent.com` returns the LFS pointer text instead of the file.
+
 ## Versioning
 
 Simple incrementing tags (`v1`, `v2`, `v3`, ...) — no semver, no changelog. Git log is the changelog.
