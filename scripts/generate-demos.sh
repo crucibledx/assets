@@ -67,6 +67,7 @@ find_tapes() {
       git -C "$REPO_ROOT" diff --name-only --cached -- '*.tape' 2>/dev/null
       git -C "$REPO_ROOT" ls-files --others --exclude-standard -- '*.tape' 2>/dev/null
     } | sort -u | while read -r rel; do
+      [[ "$rel" == .* || "$rel" == */.* ]] && continue
       local path="$REPO_ROOT/$rel"
       [[ "$(basename "$path")" == test-* ]] && continue
       [[ -f "$path" ]] && echo "$path"
@@ -74,7 +75,7 @@ find_tapes() {
     return
   fi
 
-  find "$search_dir" -name '*.tape' -not -name 'test-*' -not -path '*/\.*' | sort
+  find "$search_dir" -name '.*' -prune -o -name '*.tape' -not -name 'test-*' -print | sort
 }
 
 # Generate a single GIF from a tape + variant

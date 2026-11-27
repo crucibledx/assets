@@ -79,6 +79,8 @@ Tags exist primarily for **immutable reference URLs** in other repos.
 
 ## Exporting Assets
 
+All generation scripts work from the main clone or any Git worktree, including checkouts under `.worktrees/` or another hidden parent directory. They skip hidden directories inside the checkout, such as `.git/` and `.github/`. Run `scripts/test-worktrees.sh` to exercise discovery and `--changed` selection in a temporary repository without external tools.
+
 ### Demos (terminal recordings)
 
 Use the generation script — it handles `{{THEME}}`/`{{VARIANT}}` placeholders and places GIFs into theme subfolders automatically:

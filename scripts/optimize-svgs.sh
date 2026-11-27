@@ -46,13 +46,14 @@ find_svgs() {
       git -C "$REPO_ROOT" diff --name-only --cached -- '*.svg' 2>/dev/null
       git -C "$REPO_ROOT" ls-files --others --exclude-standard -- '*.svg' 2>/dev/null
     } | sort -u | while read -r rel; do
+      [[ "$rel" == .* || "$rel" == */.* ]] && continue
       local path="$REPO_ROOT/$rel"
       [[ -f "$path" ]] && echo "$path"
     done
     return
   fi
 
-  find "$search_dir" -name '*.svg' -not -path '*/\.*' | sort
+  find "$search_dir" -name '.*' -prune -o -name '*.svg' -print | sort
 }
 
 # Format bytes to human-readable

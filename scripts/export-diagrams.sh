@@ -87,17 +87,19 @@ find_diagrams() {
       git -C "$REPO_ROOT" diff --name-only --cached -- '*.drawio' 2>/dev/null
       git -C "$REPO_ROOT" ls-files --others --exclude-standard -- '*.drawio' 2>/dev/null
     } | sort -u | while read -r rel; do
+      [[ "$rel" == .* || "$rel" == */.* ]] && continue
       local path="$REPO_ROOT/$rel"
       [[ -f "$path" ]] && echo "$path"
     done
     return
   fi
 
-  find "$search_dir" -name '*.drawio' -not -path '*/\.*' | sort
+  find "$search_dir" -name '.*' -prune -o -name '*.drawio' -print | sort
 }
 
 # Export a single .drawio file
 export_diagram() {
+  exported_count=0
   local file="$1"
   local dir="$(dirname "$file")"
   local num_pages
@@ -113,7 +115,8 @@ export_diagram() {
     local rel="${out#$REPO_ROOT/}"
     echo "▸ Exporting $(basename "$file") → $rel"
     "$DRAWIO_CMD" -x -f "$FORMAT" -b 10 --scale "$SCALE" -o "$out" "$file" 2>/dev/null
-    return 1
+    exported_count=1
+    return 0
   fi
 
   # Multi-page — export each page separately
@@ -128,10 +131,10 @@ export_diagram() {
     local rel="${out#$REPO_ROOT/}"
     echo "▸ Exporting $(basename "$file") [page: $page_name] → $rel"
     "$DRAWIO_CMD" -x -f "$FORMAT" -p "$page_index" -b 10 --scale "$SCALE" -o "$out" "$file" 2>/dev/null
-    ((page_index++))
-    ((exported++))
+    page_index=$((page_index + 1))
+    exported=$((exported + 1))
   done <<< "$(get_pages "$file")"
-  return "$exported"
+  exported_count="$exported"
 }
 
 # Main
@@ -145,7 +148,7 @@ fi
 count=0
 while IFS= read -r file; do
   export_diagram "$file"
-  count=$((count + $?))
+  count=$((count + exported_count))
 done <<< "$diagrams"
 
 echo ""

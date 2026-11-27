@@ -39,7 +39,7 @@ find_svgs() {
     search_dir="$REPO_ROOT/$FILTER"
   fi
 
-  find "$search_dir" -path '*/light/*.svg' -not -path '*/branding/*' | sort
+  find "$search_dir" -name '.*' -prune -o -path '*/light/*.svg' -not -path '*/branding/*' -print | sort
 }
 
 # Generate dark variant of a single SVG
