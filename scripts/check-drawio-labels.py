@@ -4,8 +4,9 @@
 A label that is escaped twice, for example `&amp;lt;br&amp;gt;` in the file, renders as a literal `<br>` while
 exports and `assetkit check` still pass. This decodes each label the way draw.io does and reports:
 
-- HTML labels (`html=1` in the style): an escaped HTML tag such as `&lt;br&gt;`, or an escaped entity such as
-  `&amp;nbsp;`, left in the label's HTML. Placeholders that are not HTML tags (`&lt;ws&gt;`) are fine.
+- HTML labels (`html=1` in the style): an escaped HTML tag such as `&lt;br&gt;` (or `&#60;br&#62;`, `&#x3c;br&#x3e;`),
+  or an escaped entity such as `&amp;nbsp;`, left in the label's HTML. Placeholders that are not HTML element names
+  (`&lt;ws&gt;`) are fine; one that is (`<title>`) is flagged, so write it another way (`{title}`).
 - Plain-text labels: an HTML entity such as `&lt;` or `&amp;`, which plain text shows as typed.
 
 Only cell labels are checked (`value` on mxCell, `label` on object and UserObject), on plain and compressed pages.
@@ -33,14 +34,26 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-# HTML elements only: labels show placeholders such as `<ws>` or `<id>` as text on purpose.
+# Every HTML element, current and obsolete. Other names are not tags: labels show placeholders such as `<ws>` or
+# `<id>` as text on purpose.
 HTML_TAGS = (
-    "a|b|big|blockquote|br|caption|center|code|del|div|em|font|h[1-6]|hr|i|img|ins|li|mark|ol|p|pre|s|small|span"
-    "|strike|strong|sub|sup|table|tbody|td|th|thead|tr|u|ul"
-)
+    "a abbr acronym address applet area article aside audio b base basefont bdi bdo big blink blockquote body br "
+    "button canvas caption center cite code col colgroup data datalist dd del details dfn dialog dir div dl dt em "
+    "embed fieldset figcaption figure font footer form frame frameset h1 h2 h3 h4 h5 h6 head header hgroup hr html i "
+    "iframe img input ins kbd label legend li link main map mark marquee math menu meta meter nav nobr noframes "
+    "noscript object ol optgroup option output p picture pre progress q rp rt ruby s samp script search section "
+    "select slot small source span strike strong style sub summary sup svg table tbody td template textarea tfoot th "
+    "thead time title tr track tt u ul var video wbr xmp"
+).split()
+# `<`, `>` and `"` written as a named or numeric (decimal or hex) character reference.
+LT = r"(?:&lt;|&#0*60;|&#[xX]0*3[cC];)"
+GT = r"(?:&gt;|&#0*62;|&#[xX]0*3[eE];)"
+QUOT = r"(?:&quot;|&#0*34;|&#[xX]0*22;)"
 # Attributes need a value, so prose such as `&lt;b or c&gt;` is not read as a tag.
-ATTRIBUTE = r"""\s+[\w:-]+\s*=\s*(?:&quot;.*?&quot;|"[^"]*"|'[^']*'|[^\s&"'>]+)"""
-ESCAPED_TAG = re.compile(rf"&lt;/?(?:{HTML_TAGS})(?:{ATTRIBUTE})*\s*/?&gt;", re.IGNORECASE)
+ATTRIBUTE = rf"""\s+[\w:-]+\s*=\s*(?:{QUOT}.*?{QUOT}|"[^"]*"|'[^']*'|[^\s&"'>]+)"""
+ESCAPED_TAG = re.compile(
+    rf"{LT}/?(?:{'|'.join(sorted(HTML_TAGS, key=len, reverse=True))})(?:{ATTRIBUTE})*\s*/?{GT}", re.IGNORECASE
+)
 ENTITY = r"&(?P<name>[A-Za-z][A-Za-z0-9]*|#[0-9]+|#[xX][0-9A-Fa-f]+);"
 ESCAPED_ENTITY = re.compile(ENTITY.replace("&", "&amp;", 1))
 TEXT_ENTITY = re.compile(ENTITY)

@@ -22,6 +22,9 @@
         <mxCell id="qa" parent="1" style="rounded=0;" value="Q&amp;A; notes" vertex="1">
           <mxGeometry width="160" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="numeric" parent="1" style="html=1;" value="Slack&#60;br&#62;&lt;kbd&gt;Enter&lt;/kbd&gt;&lt;wbr&gt;bridge" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
         <UserObject id="link" label="Docs&lt;br&gt;&lt;b&gt;link&lt;/b&gt;" link="https://example.com">
           <mxCell parent="1" style="html=1;" vertex="1">
             <mxGeometry width="160" height="60" as="geometry" />

@@ -31,7 +31,8 @@ def check(name, ok):
 
 
 code, out, _ = run(FIXTURES / "clean.drawio.xml")
-check("clean labels pass: <br>, &nbsp;, &#10004;, &amp;, <ws> placeholders, prose with <, Q&A;, UserObject, "
+check("clean labels pass: <br> (named and numeric), <kbd>, <wbr>, &nbsp;, &#10004;, &amp;, <ws> placeholders, "
+      "prose with <, Q&A;, UserObject, "
       "compressed page", code == 0 and out == [])
 
 bad = FIXTURES / "double-escaped.drawio.xml"
@@ -42,11 +43,16 @@ expected = [
     f'{bad}: page "Bad", cell plain: entity in a plain-text label shows as text: &lt;',
     f'{bad}: page "Bad", cell span: escaped tag shows as text: &lt;span style=&quot;color:red&quot;&gt;',
     f'{bad}: page "Bad", cell span: escaped tag shows as text: &lt;/span&gt;',
+    f'{bad}: page "Bad", cell decimal: escaped tag shows as text: &#60;br&#62;',
+    f'{bad}: page "Bad", cell hex: escaped tag shows as text: &#x3c;wbr&#x3E;',
+    f'{bad}: page "Bad", cell kbd: escaped tag shows as text: &lt;kbd&gt;',
+    f'{bad}: page "Bad", cell kbd: escaped tag shows as text: &lt;/kbd&gt;',
     f'{bad}: page "Bad", cell link: escaped tag shows as text: &lt;b&gt;',
     f'{bad}: page "Bad", cell link: escaped tag shows as text: &lt;/b&gt;',
     f'{bad}: page "Compressed", cell z1: escaped tag shows as text: &lt;br&gt;',
 ]
-check("double-escaped labels fail with one line per problem (HTML, attributes, plain, UserObject, compressed)",
+check("double-escaped labels fail with one line per problem (HTML, numeric escapes, any HTML element, "
+      "attributes, plain, UserObject, compressed)",
       code == 1 and out == expected)
 
 code, out, _ = run(FIXTURES / "clean.drawio.xml", bad)

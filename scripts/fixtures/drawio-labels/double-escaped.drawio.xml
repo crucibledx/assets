@@ -16,6 +16,15 @@
         <mxCell id="span" parent="1" style="html=1;" value="&amp;lt;span style=&amp;quot;color:red&amp;quot;&amp;gt;red&amp;lt;/span&amp;gt;" vertex="1">
           <mxGeometry width="160" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="decimal" parent="1" style="html=1;" value="Slack&amp;#60;br&amp;#62;bridge" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="hex" parent="1" style="html=1;" value="Slack&amp;#x3c;wbr&amp;#x3E;bridge" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kbd" parent="1" style="html=1;" value="&amp;lt;kbd&amp;gt;Enter&amp;lt;/kbd&amp;gt;" vertex="1">
+          <mxGeometry width="160" height="60" as="geometry" />
+        </mxCell>
         <UserObject id="link" label="&amp;lt;b&amp;gt;Docs&amp;lt;/b&amp;gt;" link="https://example.com">
           <mxCell parent="1" style="html=1;" vertex="1">
             <mxGeometry width="160" height="60" as="geometry" />
